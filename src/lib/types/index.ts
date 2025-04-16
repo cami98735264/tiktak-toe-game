@@ -1,3 +1,5 @@
+// Stores types
+
 interface audioSettings {
     enable: boolean,
     volume: number,
@@ -29,4 +31,21 @@ export interface assetMap {
 export interface Preferences {
     audio: Audio,
     visual: Visual,
+}
+
+export interface Screens {
+    currentScreen: string,
+    previousScreen: string,
+    screenHistory: string[],
+    currentScreenParams: Record<string, any>,
+}
+
+
+// Screens Props
+export interface MainMenuProps {
+    menuOptions: {
+        label: string,
+        screen: 'game' | 'howToPlay' | 'settings.audio' | 'settings.visual',
+    }[],
+    gameLogoPath: string,
 }

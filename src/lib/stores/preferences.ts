@@ -1,7 +1,6 @@
 import { persisted } from 'svelte-persisted-store'
+import type { Preferences } from '$lib/types/index.ts';
 
-// First param `preferences` is the local storage key.
-// Second param is the initial value.
 export const preferences = persisted('preferences', {
   audio: {
     music: {
@@ -17,4 +16,4 @@ export const preferences = persisted('preferences', {
     backgroundStyle: 'classic',
     colorTheme: 'light'
   }
-});
+} as Preferences);

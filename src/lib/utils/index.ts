@@ -1,4 +1,6 @@
 import type { assetMap } from '$lib/types/index.ts';
+import { screens } from "$lib/stores/screens";
+import { get } from 'svelte/store';
 
 const getAssetUrl = (keyword: string) => {
     const assetMap: assetMap = {
@@ -24,4 +26,18 @@ const getAssetUrl = (keyword: string) => {
     return asset;
 }
 
-export { getAssetUrl };
+let handleChangeScreen = (event: MouseEvent) => {
+    let screensData = get(screens);
+    const target = event.target as HTMLElement;
+    const screen = target?.dataset?.screen;
+    if (screen) {
+        screens.set({ 
+            currentScreen: screen, 
+            previousScreen: screensData.currentScreen, 
+            screenHistory: [...screensData.screenHistory, screensData.currentScreen], 
+            currentScreenParams: {} 
+        });
+    }
+};
+
+export { getAssetUrl, handleChangeScreen };

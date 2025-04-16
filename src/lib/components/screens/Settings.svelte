@@ -1,33 +1,42 @@
 <script>
-  import LayoutSettings from "../layout/LayoutSettings.svelte";
-  import { screens } from "$lib/stores/screens";
-
-
-  let handleGoBack = () => {
-    screens.update((s) => {
-      let currentScreen = s.currentScreen;
-      s.currentScreen = s.previousScreen
-      s.previousScreen = currentScreen;
-      return s;
-    });
-  };
+  let { category } = $props();
+  import LayoutSettings from "$lib/components/layout/LayoutSettings.svelte";
+  import ToggleSwitch from "../ui/ToggleSwitch.svelte";
 </script>
 
-<LayoutSettings>
-    <button class="regresar-button" onclick={handleGoBack}>Regresar</button>
+<LayoutSettings
+  sidebarOptions={[
+    {
+      label: "Audio",
+      screen: "settings.audio",
+    },
+    {
+      label: "Visual",
+      screen: "settings.visual",
+    },
+  ]}
+  paramsCategory={category}
+>
+  {#if category === "audio"}
+      <h2>Configuración de Audio</h2>
+      <div>
+        <ToggleSwitch
+          label="Activar sonido"
+          description="Activa o desactiva el sonido del juego"
+          checked={true}
+          onChange={() => console.log("asd")}
+        />
+        
+      </div>
+  {:else if category === "visual"}
+    <h2>Visual Settings</h2>
+  {/if}
 </LayoutSettings>
 
-
-
 <style>
-
-  .regresar-button {
-    background-color: var(--primary);
+  h2 {
+    font-size: var(--font-size-large);
     color: var(--primary-content);
-    border: none;
-    padding: 10px 20px;
-    font-size: var(--font-size-medium);
-    text-shadow: var(--shadow-border-medium);
-    cursor: pointer;
+    text-shadow: var(--shadow-border-strong);
   }
 </style>

@@ -1,21 +1,9 @@
 <script lang="ts">
-    import { get } from "svelte/store";
-    import { screens } from "$lib/stores/screens";
+    let { menuOptions, gameLogoPath }: MainMenuProps = $props();
+    import { handleChangeScreen } from "$lib/utils";
     import LayoutStart from "$lib/components/layout/LayoutStart.svelte";
-    let screensData = get(screens);
+    import type { MainMenuProps } from "$lib/types";
 
-    let handleChangeScreen = (event: MouseEvent) => {
-        const target = event.target as HTMLElement;
-        const screen = target?.dataset?.screen;
-        if (screen) {
-            screens.set({ 
-                currentScreen: screen, 
-                previousScreen: screensData.currentScreen, 
-                screenHistory: [], 
-                currentScreenParams: {} 
-            });
-        }
-    };
 </script>
   
   
@@ -24,12 +12,12 @@
       <div class="start-screen-header">
           <div class="start-screen-header-content">
               <div class="start-screen-logo">
-                  <img src="/assets/logos/mathtriqui-logo.svg" alt="Logo" class="logo" />
+                  <img src={gameLogoPath} alt="Logo" class="logo" />
               </div>
               <div class="start-screen-options">
-                  <button class="start-screen-option" data-screen="play" onclick={handleChangeScreen} type="button">Empezar</button>
-                  <button class="start-screen-option" data-screen="howToPlay" onclick={handleChangeScreen} type="button">Cómo jugar</button>
-                  <button class="start-screen-option" data-screen="settings" onclick={handleChangeScreen} type="button">Opciones</button>
+                  {#each menuOptions as option}
+                      <button class="start-screen-option" data-screen={option.screen} onclick={handleChangeScreen} type="button">{option.label}</button>
+                  {/each}
               </div>
           </div>
       </div>
@@ -133,7 +121,7 @@
           display: flex;
           gap: 2rem;
           padding: 12px 24px;
-          border-radius: 4px;
+          border-radius: 8px;
           width: fit-content;
           background-color: var(--foreground);
       }
@@ -151,7 +139,7 @@
           background-color: var(--primary-content);
           text-shadow: var(--shadow-border-light);
           border: 3px solid #000;
-          border-radius: 4px;
+          border-radius: 8px;
           font-size: var(--font-size-small);
           color: var(--primary-content);
       }

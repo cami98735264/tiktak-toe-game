@@ -4,7 +4,7 @@
   import { screens } from "$lib/stores/screens";
   import { getAssetUrl } from "$lib/utils";
   import MainMenu from "$lib/components/screens/MainMenu.svelte";
-  let { children } = $props();
+  import UseGoBack from "$lib/components/hooks/useGoBack.svelte";
   import { onMount } from "svelte";
   import Settings from "$lib/components/screens/Settings.svelte";
   let pref = $state(get(preferences));
@@ -21,21 +21,21 @@
       );
     }
   });
-  
+
   $effect(() => {
-  const unsubscribePref = preferences.subscribe((value) => {
-    pref = value;
+    const unsubscribePref = preferences.subscribe((value) => {
+      pref = value;
+    });
+
+    const unsubscribeScreen = screens.subscribe((value) => {
+      screen = value;
+    });
+
+    return () => {
+      unsubscribePref();
+      unsubscribeScreen();
+    };
   });
-  
-  const unsubscribeScreen = screens.subscribe((value) => {
-    screen = value;
-  });
-  
-  return () => {
-    unsubscribePref();
-    unsubscribeScreen();
-  };
-});
   onMount(() => {
     // Load default font
     const font = new FontFace(
@@ -65,21 +65,31 @@
 </svelte:head>
 
 {#if screen.currentScreen === "mainMenu"}
-  <MainMenu />
+  <UseGoBack></UseGoBack>
+  <MainMenu
+    gameLogoPath={"/assets/logos/mathtriqui-logo.svg"}
+    menuOptions={[
+      { label: "Empezar", screen: "game" },
+      { label: "Cómo jugar", screen: "howToPlay" },
+      { label: "Opciones", screen: "settings.audio" },
+    ]}
+  />
 {:else if screen.currentScreen === "game"}
-  <slot />
-{:else if screen.currentScreen === "start"}
-  <slot />
-{:else if screen.currentScreen === "settings"}
-  <Settings/>
+  <UseGoBack showConfirmation={true}></UseGoBack>
+  <h1>Juego!</h1>
+{:else if screen.currentScreen === "settings.audio"}
+  <UseGoBack></UseGoBack>
+  <Settings category={"audio"}/>
+{:else if screen.currentScreen === "settings.visual"}
+  <UseGoBack></UseGoBack>
+  <Settings category={"visual"}/>
 {:else if screen.currentScreen === "howToPlay"}
-  <slot />
-{:else if screen.currentScreen === "credits"}
-  <slot />
+  <UseGoBack></UseGoBack>
+  <h1>Cómo jugar!</h1>
 {/if}
 
 <style>
-    :global(:root) {
+  :global(:root) {
     --primary: #007bff;
     --primary-content: #ffffff;
     --primary-dark: #0062cc;
@@ -110,12 +120,12 @@
     --font-size-medium: clamp(1.6rem, 2vw + 0.5rem, 2rem);
     --font-size-large: clamp(1.9rem, 2.5vw + 0.5rem, 2.5rem);
 
-
     /* shadow borders for text */
-    --shadow-border-light: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+    --shadow-border-light: -1.5px 0 black, 0 1.5px black, 1.5px 0 black,
+      0 -1.5px black;
     --shadow-border-medium: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    --shadow-border-strong: -2.5px 0 black, 0 2.5px black, 2.5px 0 black, 0 -2.5px black;
-
+    --shadow-border-strong: -2.5px 0 black, 0 2.5px black, 2.5px 0 black,
+      0 -2.5px black;
   }
   @font-face {
     font-family: "Freckle Face";
@@ -139,5 +149,4 @@
     box-sizing: border-box;
     font-family: "Freckle Face", cursive;
   }
-
 </style>
