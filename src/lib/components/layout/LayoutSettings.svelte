@@ -1,15 +1,192 @@
 <script lang="ts">
   import { handleChangeScreen } from "$lib/utils";
+  import { onMount } from "svelte";
 
-    let { sidebarOptions, paramsCategory, children } = $props();
+  let { sidebarOptions, paramsCategory, children } = $props();
+  let focusedOptionIndex = $state(0);
+  let sidebarButtons: HTMLButtonElement[] = [];
+  let isInContentArea = $state(false);
+  let contentFocusableElements: HTMLElement[] = [];
+  let contentFocusedIndex = $state(0);
+  let settingsContainers: HTMLElement[] = [];
+  let currentContainerIndex = $state(0);
+  let regresarButton: HTMLButtonElement | null = null;
+
+  // Find the index of the current category in sidebarOptions
+  $effect(() => {
+    const currentIndex = sidebarOptions.findIndex((option: { screen: string }) => 
+      option.screen.split(".")[1] === paramsCategory
+    );
+    if (currentIndex !== -1) {
+      focusedOptionIndex = currentIndex;
+    }
+  });
+
+  // Handle keyboard navigation
+  function handleKeyDown(event: KeyboardEvent) {
+    const key = event.key.toLowerCase();
+    
+    // Navigation in sidebar
+    if (!isInContentArea) {
+      if (key === 'arrowdown' || key === 's') {
+        event.preventDefault();
+        focusedOptionIndex = (focusedOptionIndex + 1) % sidebarOptions.length;
+        sidebarButtons[focusedOptionIndex].focus();
+        // Change screen when moving in sidebar
+        const newScreen = sidebarOptions[focusedOptionIndex].screen;
+        if (newScreen !== paramsCategory) {
+          const button = sidebarButtons[focusedOptionIndex];
+          button.click();
+        }
+      } else if (key === 'arrowup' || key === 'w') {
+        event.preventDefault();
+        focusedOptionIndex = (focusedOptionIndex - 1 + sidebarOptions.length) % sidebarOptions.length;
+        sidebarButtons[focusedOptionIndex].focus();
+        // Change screen when moving in sidebar
+        const newScreen = sidebarOptions[focusedOptionIndex].screen;
+        if (newScreen !== paramsCategory) {
+          const button = sidebarButtons[focusedOptionIndex];
+          button.click();
+        }
+      } else if (key === 'arrowright' || key === 'd') {
+        event.preventDefault();
+        isInContentArea = true;
+        currentContainerIndex = 0;
+        if (settingsContainers.length > 0) {
+          const firstFocusable = settingsContainers[0].querySelector('button, input, select, .toggle-wrapper button') as HTMLElement;
+          if (firstFocusable) {
+            firstFocusable.focus();
+          }
+        }
+      } else if (key === 'arrowleft' || key === 'a') {
+        event.preventDefault();
+        // Focus the Regresar button when pressing left in sidebar
+        if (regresarButton) {
+          regresarButton.focus();
+        }
+      }
+    } 
+    // Navigation in content area
+    else {
+      if (key === 'arrowleft' || key === 'a') {
+        event.preventDefault();
+        const currentContainer = settingsContainers[currentContainerIndex];
+        const focusableElements = Array.from(currentContainer.querySelectorAll('button, input, select, .toggle-wrapper button')) as HTMLElement[];
+        const currentElement = document.activeElement as HTMLElement;
+        const currentIndex = focusableElements.indexOf(currentElement);
+
+        // If we're at the first element of the first container, go back to sidebar
+        if (currentContainerIndex === 0 && currentIndex === 0) {
+          isInContentArea = false;
+          sidebarButtons[focusedOptionIndex].focus();
+        } 
+        // If we're at the first element of any container, move to previous container
+        else if (currentIndex === 0) {
+          currentContainerIndex = (currentContainerIndex - 1) % settingsContainers.length;
+          const prevContainer = settingsContainers[currentContainerIndex];
+          const prevFocusableElements = Array.from(prevContainer.querySelectorAll('button, input, select, .toggle-wrapper button')) as HTMLElement[];
+          if (prevFocusableElements.length > 0) {
+            prevFocusableElements[prevFocusableElements.length - 1].focus();
+          }
+        }
+        // Otherwise move to previous element in current container
+        else {
+          focusableElements[currentIndex - 1].focus();
+        }
+      } else if (key === 'arrowdown' || key === 's') {
+        event.preventDefault();
+        // Move to next container
+        currentContainerIndex = (currentContainerIndex + 1) % settingsContainers.length;
+        const firstFocusable = settingsContainers[currentContainerIndex].querySelector('button, input, select, .toggle-wrapper button') as HTMLElement;
+        if (firstFocusable) {
+          firstFocusable.focus();
+        }
+      } else if (key === 'arrowup' || key === 'w') {
+        event.preventDefault();
+        // Move to previous container
+        currentContainerIndex = (currentContainerIndex - 1 + settingsContainers.length) % settingsContainers.length;
+        const firstFocusable = settingsContainers[currentContainerIndex].querySelector('button, input, select, .toggle-wrapper button') as HTMLElement;
+        if (firstFocusable) {
+          firstFocusable.focus();
+        }
+      } else if (key === 'arrowright' || key === 'd') {
+        event.preventDefault();
+        // Move to next focusable element in current container
+        const currentContainer = settingsContainers[currentContainerIndex];
+        const focusableElements = Array.from(currentContainer.querySelectorAll('button, input, select, .toggle-wrapper button')) as HTMLElement[];
+        const currentElement = document.activeElement as HTMLElement;
+        const currentIndex = focusableElements.indexOf(currentElement);
+        
+        if (currentIndex < focusableElements.length - 1) {
+          focusableElements[currentIndex + 1].focus();
+        }
+      }
+    }
+  }
+
+  // Update content focusable elements when content changes
+  $effect(() => {
+    if (isInContentArea) {
+      // Get all settings containers
+      settingsContainers = Array.from(
+        document.querySelectorAll('.settings-options-container')
+      ) as HTMLElement[];
+      
+      // Sort containers by their position in the DOM (top to bottom)
+      settingsContainers.sort((a, b) => {
+        const rectA = a.getBoundingClientRect();
+        const rectB = b.getBoundingClientRect();
+        return rectA.top - rectB.top;
+      });
+
+      if (settingsContainers.length > 0) {
+        const firstFocusable = settingsContainers[currentContainerIndex].querySelector('button, input, select, .toggle-wrapper button') as HTMLElement;
+        if (firstFocusable) {
+          firstFocusable.focus();
+        }
+      }
+    }
+  });
+
+  onMount(() => {
+    // Find all sidebar buttons
+    sidebarButtons = Array.from(document.querySelectorAll('.settings-sidebar button'));
+    // Find the Regresar button
+    regresarButton = document.querySelector('.regresar-button');
+    
+    // Focus the current category option
+    const currentIndex = sidebarOptions.findIndex((option: { screen: string }) => 
+      option.screen.split(".")[1] === paramsCategory
+    );
+    if (currentIndex !== -1) {
+      focusedOptionIndex = currentIndex;
+      setTimeout(() => {
+        sidebarButtons[currentIndex].focus();
+      }, 100);
+    }
+    
+    // Add event listeners
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Clean up event listeners when component is destroyed
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  });
 </script>
 
 <main>
     <h1 class="settings-title">Opciones</h1>
     <div class="settings-container">
         <div class="settings-sidebar">
-            {#each sidebarOptions as option}
-                <button class={option.screen.split(".")[1] === paramsCategory ? "selected" : ""} data-screen={option.screen} type="button" onclick={handleChangeScreen}>
+            {#each sidebarOptions as option, i}
+                <button 
+                    class={option.screen.split(".")[1] === paramsCategory ? "selected" : ""} 
+                    data-screen={option.screen} 
+                    type="button" 
+                    onclick={handleChangeScreen}
+                    tabindex={i === focusedOptionIndex ? 0 : -1}
+                >
                     {option.label}
                 </button>
             {/each}
@@ -19,8 +196,6 @@
         </div>
     </div>
 </main>
-
-
 
 <style>
     .settings-title {
@@ -66,7 +241,16 @@
         text-shadow: var(--shadow-border-medium);
         cursor: pointer;
         border: 3px solid var(--primary-dark);
+        transition: all 0.3s ease;
     }
+
+    .settings-sidebar button:focus {
+        outline: none;
+        background-color: var(--secondary);
+        color: var(--primary-content);
+        transform: scale(1.05);
+    }
+
     .settings-content {
         display: flex;
         flex-direction: column;
@@ -74,9 +258,37 @@
         border-radius: 8px;
         background-color: var(--primary-light);
         border: 3px solid var(--primary-dark);
-        /* fill height */
         height: 100%;
         padding: 2rem;
         flex: 1;
+    }
+
+    /* Style for focused elements in content area */
+    :global(.settings-content button:focus),
+    :global(.settings-content input:focus),
+    :global(.settings-content select:focus),
+    :global(.settings-content .toggle-wrapper button:focus) {
+        outline: none;
+        background-color: var(--secondary);
+        color: var(--primary-content);
+        transform: scale(1.05);
+    }
+
+    :global(.regresar-button) {
+        background-color: transparent;
+        color: var(--primary-content);
+        border: none;
+        height: 60px;
+        padding: 10px 20px;
+        font-size: var(--font-size-medium);
+        text-shadow: var(--shadow-border-medium);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    :global(.regresar-button:hover),
+    :global(.regresar-button:focus) {
+        color: var(--secondary);
+        transform: scale(1.05);
     }
 </style>

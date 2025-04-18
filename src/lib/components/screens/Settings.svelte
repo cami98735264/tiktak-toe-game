@@ -6,7 +6,16 @@
   import Slider from "../ui/Slider.svelte";
   import ToggleSwitch from "../ui/ToggleSwitch.svelte";
 
-  let preferencesData = get(preferences);
+  let preferencesData = $state(get(preferences));
+
+  $effect(() => {
+    const unsubscribe = preferences.subscribe((value) => {
+      preferencesData = value;
+    });
+    return () => {
+      unsubscribe();
+    };
+  });
 </script>
 
 <LayoutSettings
@@ -71,6 +80,7 @@
           <ToggleSwitch
             propertyToChange="visual.backgroundStyle"
             multiOption={true}
+            selectedOption={preferencesData.visual.backgroundStyle}
             options={[
               {
                 label: "Clasico",
@@ -96,11 +106,11 @@
           ></ToggleSwitch>
         </div>
         <div class="settings-options-container">
-
           <h3 class="settings-subtitle">Tema de colores</h3>
           <ToggleSwitch
-            propertyToChange="visual.theme"
+            propertyToChange="visual.colorTheme"
             multiOption={true}
+            selectedOption={preferencesData.visual.colorTheme}
             options={[
               {
                 label: "Claro",
@@ -116,7 +126,7 @@
               },
             ]}
           ></ToggleSwitch>
-          </div>
+        </div>
       </div>
     </div>
   {/if}

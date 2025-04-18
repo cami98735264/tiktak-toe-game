@@ -32,10 +32,13 @@ let handleChangeScreen = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
     const screen = target?.dataset?.screen;
     if (screen && screen !== screensData.currentScreen) {
+        const updatedScreenHistory = screensData.screenHistory.includes(screensData.currentScreen)
+            ? screensData.screenHistory
+            : [...screensData.screenHistory, screensData.currentScreen];
         screens.set({ 
             currentScreen: screen, 
             previousScreen: screensData.currentScreen, 
-            screenHistory: [...screensData.screenHistory, screensData.currentScreen], 
+            screenHistory: updatedScreenHistory, 
             currentScreenParams: {} 
         });
     }
