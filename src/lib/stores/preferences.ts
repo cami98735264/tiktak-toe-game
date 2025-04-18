@@ -5,11 +5,11 @@ export const preferences = persisted('preferences', {
   audio: {
     music: {
         enable: true,
-        volume: 0.5,
+        volume: 50,
     },
     effects: {
         enable: true,
-        volume: 0.5,
+        volume: 50,
     }
   },
   visual: {
@@ -17,3 +17,4 @@ export const preferences = persisted('preferences', {
     colorTheme: 'light'
   }
 } as Preferences);
+

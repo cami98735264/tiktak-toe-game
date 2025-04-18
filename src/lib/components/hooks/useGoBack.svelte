@@ -33,7 +33,7 @@
 </script>
 
 {#if currentScreen !== "mainMenu"}
-  <button class="regresar-button" onclick={handleGoBack}>Regresar</button>
+  <button class="regresar-button" onclick={handleGoBack}>{"<"} Regresar</button>
 {/if}
 
 <style>

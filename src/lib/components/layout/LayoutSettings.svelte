@@ -33,7 +33,7 @@
         height: calc(100dvh - 60px);
         display: flex;
         flex-direction: column;
-        padding: 6rem;
+        padding: 2rem 8rem;
     }
     .settings-container {
         display: flex;
@@ -68,12 +68,15 @@
         border: 3px solid var(--primary-dark);
     }
     .settings-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
         border-radius: 8px;
         background-color: var(--primary-light);
         border: 3px solid var(--primary-dark);
         /* fill height */
         height: 100%;
-        padding: 1rem;
+        padding: 2rem;
         flex: 1;
     }
 </style>

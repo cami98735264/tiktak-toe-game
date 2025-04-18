@@ -1,17 +1,17 @@
 // Stores types
 
-interface audioSettings {
+export interface audioSettings {
     enable: boolean,
     volume: number,
 }
 
-interface Audio {
+export interface Audio {
     music: audioSettings,
     effects: audioSettings,
 }
 
 
-interface Visual {
+export interface Visual {
     backgroundStyle: 'classic' | 'digital' | 'grafitti' | 'neon' | 'minimalistic',
     colorTheme: 'light' | 'dark' | 'colorful'
 }
@@ -49,3 +49,23 @@ export interface MainMenuProps {
     }[],
     gameLogoPath: string,
 }
+
+
+
+
+// Components Props
+
+// ToggleSwitchProps
+  export interface ToggleSwitchProps {
+	isActive?: boolean; // Default state of the toggle switch
+	enableText?: string; // Text for the "enable" button
+	disableText?: string; // Text for the "disable" button
+	options?: ToggleSwitchOption[]; // Array of option strings for multi-option mode
+	selectedOption?: string; // Currently selected option in multi-option mode
+	propertyToChange?: string; // Property to change when toggled or selected
+	multiOption?: boolean; // Whether to use multi-option mode or boolean toggle
+  }
+  export interface ToggleSwitchOption {
+	label: string;
+	value: string;
+  }
