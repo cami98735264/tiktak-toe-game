@@ -202,7 +202,7 @@
   {#each gameState.board as cell, index}
     <button
       class="cell"
-      on:click={() => handleCellClick(index)}
+      onclick={() => handleCellClick(index)}
       disabled={gameState.gameOver || cell !== null || showQuestion}
     >
       {cell}
@@ -217,7 +217,7 @@
       <p>{currentQuestion.question}</p>
       <div class="options">
         {#each currentQuestion.options as option, i}
-          <button on:click={() => handleAnswer(i)}>
+          <button onclick={() => handleAnswer(i)}>
             {option}
           </button>
         {/each}
@@ -236,7 +236,7 @@
           ¡Jugador {gameState.winner} gana!
         {/if}
       </h2>
-      <button on:click={() => window.location.reload()}>
+      <button onclick={() => window.location.reload()}>
         Jugar de nuevo
       </button>
     </div>
@@ -254,7 +254,7 @@
     background-color: var(--background);
     border: none;
     border-radius: 8px;
-    font-size: 1.5rem;
+    font-size: var(--font-size-medium);
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -320,10 +320,16 @@
   }
 
   .question-content h2,
-  .game-over-content h2,
+  .game-over-content h2 {
+    color: var(--primary-content);
+    text-shadow: var(--shadow-border-light);
+    font-size: var(--font-size-large);
+  }
+
   .question-content p {
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
+    font-size: var(--font-size-medium);
   }
 
   .options {
@@ -342,7 +348,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     text-shadow: var(--shadow-border-light);
-    font-size: 1.1rem;
+    font-size: var(--font-size-small);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
@@ -380,7 +386,7 @@
     color: var(--primary-content);
     padding: 1rem 2rem;
     border-radius: 8px;
-    font-size: 1.2rem;
+    font-size: var(--font-size-medium);
     font-weight: bold;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

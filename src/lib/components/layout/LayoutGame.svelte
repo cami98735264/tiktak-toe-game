@@ -19,12 +19,16 @@
 <div class="game-layout">
   <div class="timer-container">
     <div class="timer">
+      <img src="/assets/icons/timer-icon.svg" alt="timer" class="timer-icon" />
       <div class="time-remaining">{gameState.timeRemaining}s</div>
     </div>
   </div>
   <div class="game-content">
     <div class="player player1">
-      <div class="player-name">Jugador 1</div>
+      <div class="player-name">
+        <img src="/assets/icons/person-icon.svg" alt="person" class="person-icon" />
+        <span>Jugador 1</span>
+      </div>
       <div class="player-lives">
         {#each Array(5) as _, i}
           <img 
@@ -41,7 +45,10 @@
       {@render children()}
     </div>
     <div class="player player2">
-      <div class="player-name">Jugador 2</div>
+      <div class="player-name">
+        <img src="/assets/icons/person-icon.svg" alt="person" class="person-icon" />
+        <span>Jugador 2</span>
+      </div>
       <div class="player-lives">
         {#each Array(5) as _, i}
           <img 
@@ -97,21 +104,26 @@
   .timer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background-color: var(--foreground);
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    background-color: var(--primary-dark);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
+  .timer-icon {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+  }
+
   .time-remaining {
-    font-size: 2rem;
+    font-size: var(--font-size-large);
     font-weight: bold;
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background-color: var(--primary);
+    display: flex;
+    align-items: center;
   }
 
   .game-content {
@@ -139,7 +151,10 @@
   }
 
   .player-name {
-    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-small);
     font-weight: bold;
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
@@ -168,7 +183,7 @@
   }
 
   .player-character {
-    font-size: 2rem;
+    font-size: var(--font-size-large);
     font-weight: bold;
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
@@ -223,7 +238,7 @@
   }
 
   .tip-text {
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     font-weight: bold;
   }
 
@@ -240,15 +255,20 @@
   }
 
   .stat-label {
-    font-size: 0.8rem;
+    font-size: var(--font-size-small);
     color: var(--copy-light);
     text-shadow: var(--shadow-border-light);
   }
 
   .stat-value {
-    font-size: 1rem;
+    font-size: var(--font-size-medium);
     font-weight: bold;
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
+  }
+
+  .person-icon {
+    width: 30px;
+    height: 30px;
   }
 </style> 
