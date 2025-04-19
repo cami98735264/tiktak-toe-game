@@ -188,7 +188,7 @@
       }
   
       .start-screen-logo img {
-          width: clamp(18.75rem, 17.788rem + 3.077vw, 21.25rem)
+          width: var(--game-logo-width);
       }
   
       .start-screen-header {

@@ -7,6 +7,7 @@
   import UseGoBack from "$lib/components/hooks/useGoBack.svelte";
   import { onMount } from "svelte";
   import Settings from "$lib/components/screens/Settings.svelte";
+  import Game from "$lib/components/screens/Game.svelte";
   let pref = $state(get(preferences));
   let screen = $state(get(screens));
   // Audio elements
@@ -170,7 +171,7 @@
   />
 {:else if screen.currentScreen === "game"}
   <UseGoBack showConfirmation={true}></UseGoBack>
-  <h1>Juego!</h1>
+  <Game />
 {:else if screen.currentScreen === "settings.audio"}
   <UseGoBack></UseGoBack>
   <Settings category={"audio"}/>

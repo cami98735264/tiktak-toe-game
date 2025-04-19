@@ -1,0 +1,152 @@
+[
+  {
+    "question": "¿Cuál es la probabilidad de obtener un 6 al lanzar un dado justo?",
+    "options": ["1/6", "1/3", "1/2", "2/3"],
+    "correct": 0
+  },
+  {
+    "question": "Si lanzas una moneda justa dos veces, ¿cuál es la probabilidad de obtener dos caras?",
+    "options": ["1/4", "1/2", "3/4", "1"],
+    "correct": 0
+  },
+  {
+    "question": "En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un as?",
+    "options": ["1/13", "1/4", "1/26", "1/52"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 3 bolas rojas y 2 azules, ¿cuál es la probabilidad de sacar una bola roja?",
+    "options": ["3/5", "2/5", "1/2", "1/3"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar dos dados la suma sea 7?",
+    "options": ["1/6", "1/12", "1/36", "1/18"],
+    "correct": 0
+  },
+  {
+    "question": "En una ruleta con 37 números (0-36), ¿cuál es la probabilidad de que salga un número par?",
+    "options": ["18/37", "1/2", "19/37", "17/37"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes 5 llaves y solo una abre la puerta, ¿cuál es la probabilidad de abrir la puerta al primer intento?",
+    "options": ["1/5", "1/4", "1/3", "1/2"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar una moneda tres veces salga al menos una cara?",
+    "options": ["7/8", "1/2", "3/4", "1/8"],
+    "correct": 0
+  },
+  {
+    "question": "En una clase de 30 estudiantes, 18 son mujeres. ¿Cuál es la probabilidad de seleccionar al azar un hombre?",
+    "options": ["2/5", "3/5", "1/2", "1/3"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 4 bolas blancas y 6 negras, ¿cuál es la probabilidad de sacar dos bolas blancas seguidas sin reemplazo?",
+    "options": ["2/15", "4/25", "1/5", "3/10"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar un dado salga un número mayor que 4?",
+    "options": ["1/3", "1/2", "2/3", "1/6"],
+    "correct": 0
+  },
+  {
+    "question": "En una lotería con 1000 boletos, si compras 10, ¿cuál es la probabilidad de ganar?",
+    "options": ["1/100", "1/10", "1/50", "1/20"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 5 bolas rojas, 3 verdes y 2 azules, ¿cuál es la probabilidad de sacar una bola que no sea roja?",
+    "options": ["1/2", "3/5", "2/5", "1/3"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar dos monedas salga al menos una cruz?",
+    "options": ["3/4", "1/2", "1/4", "1"],
+    "correct": 0
+  },
+  {
+    "question": "En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un corazón o un as?",
+    "options": ["16/52", "13/52", "17/52", "4/52"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 8 bolas numeradas del 1 al 8, ¿cuál es la probabilidad de sacar un número primo?",
+    "options": ["1/2", "3/8", "5/8", "1/4"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar un dado salga un número par o mayor que 3?",
+    "options": ["2/3", "1/2", "5/6", "1/3"],
+    "correct": 0
+  },
+  {
+    "question": "En una clase de 40 estudiantes, 25 aprobaron matemáticas y 30 aprobaron física. Si 20 aprobaron ambas, ¿cuál es la probabilidad de que un estudiante seleccionado al azar haya aprobado al menos una de las dos?",
+    "options": ["7/8", "3/4", "5/8", "1/2"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 6 bolas rojas y 4 azules, ¿cuál es la probabilidad de sacar dos bolas del mismo color sin reemplazo?",
+    "options": ["7/15", "1/3", "2/5", "3/10"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar tres monedas salgan exactamente dos caras?",
+    "options": ["3/8", "1/2", "1/4", "1/8"],
+    "correct": 0
+  },
+  {
+    "question": "En una bolsa hay 10 bolas: 4 rojas, 3 verdes y 3 azules. ¿Cuál es la probabilidad de sacar una bola que no sea azul?",
+    "options": ["7/10", "3/10", "4/10", "6/10"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar dos dados la suma sea mayor que 9?",
+    "options": ["1/6", "1/4", "1/3", "1/2"],
+    "correct": 0
+  },
+  {
+    "question": "En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar una carta que sea un corazón o una figura?",
+    "options": ["11/26", "1/2", "7/13", "3/4"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 5 bolas blancas y 7 negras, ¿cuál es la probabilidad de sacar dos bolas de diferente color sin reemplazo?",
+    "options": ["35/66", "1/2", "5/12", "7/12"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar un dado salga un número menor que 5 o mayor que 2?",
+    "options": ["5/6", "2/3", "1/2", "1/3"],
+    "correct": 0
+  },
+  {
+    "question": "En una clase de 50 estudiantes, 30 estudian inglés y 25 estudian francés. Si 10 estudian ambos, ¿cuál es la probabilidad de que un estudiante seleccionado al azar estudie al menos uno de los dos idiomas?",
+    "options": ["9/10", "4/5", "3/4", "2/3"],
+    "correct": 0
+  },
+  {
+    "question": "Si tienes una bolsa con 6 bolas rojas y 4 verdes, ¿cuál es la probabilidad de sacar dos bolas rojas con reemplazo?",
+    "options": ["9/25", "1/3", "2/5", "3/10"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar cuatro monedas salgan exactamente tres caras?",
+    "options": ["1/4", "1/2", "3/8", "1/8"],
+    "correct": 0
+  },
+  {
+    "question": "En una bolsa hay 12 bolas: 5 rojas, 4 verdes y 3 azules. ¿Cuál es la probabilidad de sacar una bola que no sea verde?",
+    "options": ["2/3", "1/3", "5/12", "7/12"],
+    "correct": 0
+  },
+  {
+    "question": "¿Cuál es la probabilidad de que al lanzar dos dados la suma sea un número primo?",
+    "options": ["5/12", "1/3", "1/2", "7/12"],
+    "correct": 0
+  }
+] 
