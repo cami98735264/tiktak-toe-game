@@ -22,13 +22,20 @@
     // Handle menu navigation
     function handleMenuNavigation(event: KeyboardEvent): void {
         const key = event.key.toLowerCase();
-        
+        const clickAudio = document.querySelector('#click-audio') as HTMLAudioElement;
         // Skip if no menu options are available
         if (menuOptions.length === 0) return;
-        
-        // Navigation based on keys
+        if (key === 'arrowdown' || key === 's' || key === 'arrowup' || key === 'w') {
+            if (clickAudio) {
+                clickAudio.currentTime = 0; // Reset audio to start
+                clickAudio.play().catch(err => {
+                    console.error("Failed to play click sound:", err);
+                });
+            }
+        }
         if (key === 'arrowdown' || key === 's') {
             event.preventDefault();
+
             focusedOptionIndex = (focusedOptionIndex + 1) % menuOptions.length;
             menuOptions[focusedOptionIndex].focus();
         } else if (key === 'arrowup' || key === 'w') {

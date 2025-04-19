@@ -9,10 +9,9 @@
   import Settings from "$lib/components/screens/Settings.svelte";
   let pref = $state(get(preferences));
   let screen = $state(get(screens));
-  // Font loading
-  let fontLoaded = false;
   // Audio elements
   let backgroundMusic: HTMLAudioElement;
+  let clickAudio: HTMLAudioElement;
   let audioInitialized = false;
 
   $effect(() => {
@@ -102,6 +101,14 @@
   />
 </svelte:head>
 
+
+<audio 
+  bind:this={clickAudio}
+  id="click-audio"
+  src="/assets/audios/effects/click.mp3"
+  volume={pref.audio.effects.volume / 100}
+  muted={!pref.audio.effects.enable}
+></audio>
 <audio
   bind:this={backgroundMusic}
   id="background-music"
