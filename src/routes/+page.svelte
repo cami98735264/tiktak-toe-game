@@ -21,6 +21,47 @@
         "--backgroundImageStyle",
         `url(${getAssetUrl(`background.${pref.visual.backgroundStyle}`)})`
       );
+
+      // Update color theme variables based on the selected theme
+      switch (pref.visual.colorTheme) {
+        case 'dark':
+          document.documentElement.style.setProperty('--primary', '#1a1a1a');
+          document.documentElement.style.setProperty('--primary-dark', '#000000');
+          document.documentElement.style.setProperty('--primary-light', '#333333');
+          document.documentElement.style.setProperty('--background', '#121212');
+          document.documentElement.style.setProperty('--foreground', '#1a1a1a');
+          document.documentElement.style.setProperty('--copy', '#ffffff');
+          document.documentElement.style.setProperty('--copy-light', '#cccccc');
+          document.documentElement.style.setProperty('--copy-lighter', '#999999');
+          break;
+        case 'colorful':
+          document.documentElement.style.setProperty('--primary', '#4a90e2');
+          document.documentElement.style.setProperty('--primary-dark', '#357abd');
+          document.documentElement.style.setProperty('--primary-light', '#6ba7e8');
+          document.documentElement.style.setProperty('--secondary', '#ff6b6b');
+          document.documentElement.style.setProperty('--secondary-dark', '#e05555');
+          document.documentElement.style.setProperty('--secondary-light', '#ff8585');
+          document.documentElement.style.setProperty('--background', '#f5f7fa');
+          document.documentElement.style.setProperty('--foreground', '#4a90e2');
+          document.documentElement.style.setProperty('--copy', '#2c3e50');
+          document.documentElement.style.setProperty('--copy-light', '#7f8c8d');
+          document.documentElement.style.setProperty('--copy-lighter', '#bdc3c7');
+          break;
+        case 'light':
+        default:
+          document.documentElement.style.setProperty('--primary', '#007bff');
+          document.documentElement.style.setProperty('--primary-dark', '#0062cc');
+          document.documentElement.style.setProperty('--primary-light', '#3395ff');
+          document.documentElement.style.setProperty('--secondary', '#ff9900');
+          document.documentElement.style.setProperty('--secondary-dark', '#cc7a00');
+          document.documentElement.style.setProperty('--secondary-light', '#ffad33');
+          document.documentElement.style.setProperty('--background', '#eff0f1');
+          document.documentElement.style.setProperty('--foreground', '#3395ff');
+          document.documentElement.style.setProperty('--copy', '#232629');
+          document.documentElement.style.setProperty('--copy-light', '#5e666e');
+          document.documentElement.style.setProperty('--copy-lighter', '#848c95');
+          break;
+      }
     }
   });
 

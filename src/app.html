@@ -11,6 +11,58 @@
 	</body>
 </html>
 
+<script>
+	// Initialize color theme from localStorage
+	document.addEventListener('DOMContentLoaded', () => {
+		const savedPreferences = localStorage.getItem('preferences');
+		if (savedPreferences) {
+			const preferences = JSON.parse(savedPreferences);
+			const colorTheme = preferences.visual?.colorTheme || 'light';
+			
+			// Apply initial color theme
+			const root = document.documentElement;
+			switch (colorTheme) {
+				case 'dark':
+					root.style.setProperty('--primary', '#1a1a1a');
+					root.style.setProperty('--primary-dark', '#000000');
+					root.style.setProperty('--primary-light', '#333333');
+					root.style.setProperty('--background', '#121212');
+					root.style.setProperty('--foreground', '#1a1a1a');
+					root.style.setProperty('--copy', '#ffffff');
+					root.style.setProperty('--copy-light', '#cccccc');
+					root.style.setProperty('--copy-lighter', '#999999');
+					break;
+				case 'colorful':
+					root.style.setProperty('--primary', '#4a90e2');
+					root.style.setProperty('--primary-dark', '#357abd');
+					root.style.setProperty('--primary-light', '#6ba7e8');
+					root.style.setProperty('--secondary', '#ff6b6b');
+					root.style.setProperty('--secondary-dark', '#e05555');
+					root.style.setProperty('--secondary-light', '#ff8585');
+					root.style.setProperty('--background', '#f5f7fa');
+					root.style.setProperty('--foreground', '#4a90e2');
+					root.style.setProperty('--copy', '#2c3e50');
+					root.style.setProperty('--copy-light', '#7f8c8d');
+					root.style.setProperty('--copy-lighter', '#bdc3c7');
+					break;
+				case 'light':
+				default:
+					root.style.setProperty('--primary', '#007bff');
+					root.style.setProperty('--primary-dark', '#0062cc');
+					root.style.setProperty('--primary-light', '#3395ff');
+					root.style.setProperty('--secondary', '#ff9900');
+					root.style.setProperty('--secondary-dark', '#cc7a00');
+					root.style.setProperty('--secondary-light', '#ffad33');
+					root.style.setProperty('--background', '#eff0f1');
+					root.style.setProperty('--foreground', '#3395ff');
+					root.style.setProperty('--copy', '#232629');
+					root.style.setProperty('--copy-light', '#5e666e');
+					root.style.setProperty('--copy-lighter', '#848c95');
+					break;
+			}
+		}
+	});
+</script>
 
 <style>
 	:root {
