@@ -33,7 +33,7 @@
     player2Lives: 5,
     player1Character: "X",
     player2Character: "O",
-    timeRemaining: 60,
+    timeRemaining: 600,
     gameOver: false,
     winner: null
   });

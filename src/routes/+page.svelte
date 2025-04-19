@@ -8,6 +8,7 @@
   import { onMount } from "svelte";
   import Settings from "$lib/components/screens/Settings.svelte";
   import Game from "$lib/components/screens/Game.svelte";
+  import HowToPlay from "$lib/components/screens/HowToPlay.svelte";
   let pref = $state(get(preferences));
   let screen = $state(get(screens));
   // Audio elements
@@ -180,5 +181,5 @@
   <Settings category={"visual"}/>
 {:else if screen.currentScreen === "howToPlay"}
   <UseGoBack></UseGoBack>
-  <h1>Cómo jugar!</h1>
+  <HowToPlay />
 {/if}
