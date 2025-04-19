@@ -3,7 +3,6 @@
     
     let primaryColor = "var(--secondary)";
     let secondaryColor = "white";
-    let width = 450;
   
     let {
       id = `slider-${Math.random().toString(36).substring(2, 9)}`,  // Generate unique ID for each instance
@@ -60,11 +59,11 @@
     }
   </script>
   
-  <div class="slider-container">
+  <div class="slider-container" style="width: 100%;">
     {#if label}
       <div class="slider-label">{label} <span class="percentage-value">{value}%</span></div>
     {/if}
-    <div class="range-wrapper" style="width: {width}px;">
+    <div class="range-wrapper" style="width: 100%;">
       <!-- Value indicator appears during interaction -->
       <div 
         class="value-indicator {showValue ? 'visible' : ''}" 
@@ -97,8 +96,8 @@
     .slider-container {
       padding: 1rem 0;
       border-radius: 8px;
-      width: fit-content;
       display: flex;
+      max-width: 100%;
       flex-direction: column;
       align-items: center;
     }
@@ -159,6 +158,10 @@
       border-radius: 50%;
       border: 2px solid #ccc;
       cursor: pointer;
+    }
+
+    input[type="range"]:focus {
+      transform: none;
     }
   
     .range-labels {

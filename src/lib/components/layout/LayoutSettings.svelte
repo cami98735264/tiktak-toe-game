@@ -200,7 +200,6 @@
       }
     }
   });
-
   onMount(() => {
     // Find all sidebar buttons
     sidebarButtons = Array.from(
@@ -223,7 +222,6 @@
 
     // Add event listeners
     window.addEventListener("keydown", handleKeyDown);
-
     // Clean up event listeners when component is destroyed
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -260,11 +258,11 @@
     font-size: var(--font-size-large);
     color: var(--primary-content);
     text-shadow: var(--shadow-border-strong);
-    margin-bottom: 2rem;
   }
   main {
-    height: calc(100dvh - 60px);
+    min-height: calc(100dvh - 60px);
     display: flex;
+    gap: 1rem;
     flex-direction: column;
     padding: 2rem 8rem;
   }
@@ -348,5 +346,24 @@
   :global(.regresar-button:focus) {
     color: var(--secondary);
     transform: scale(1.05);
+  }
+
+  @media (max-width: 1180px) {
+    main {
+      padding: 1rem;
+    }
+    .settings-container {
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+    }
+    .settings-sidebar {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    .settings-content {
+      padding: 1rem;
+      width: 100%;
+    }
   }
 </style>
