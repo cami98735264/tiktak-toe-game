@@ -188,7 +188,7 @@
       }
   
       .start-screen-logo img {
-          width: clamp(300px, 50vw, 500px);
+          width: clamp(18.75rem, 17.788rem + 3.077vw, 21.25rem)
       }
   
       .start-screen-header {
@@ -255,8 +255,8 @@
       .keybind-container {
           display: flex;
           justify-content: center;
-          width: 50px;
-          padding: 12px 28px;
+          width: 25px;
+          padding: 6px 22px;
           background-color: var(--primary-content);
           text-shadow: var(--shadow-border-light);
           border: 3px solid #000;
@@ -301,7 +301,7 @@
           }
   
           .keybind-container {
-              padding: 10px 8px;
+              padding: 8px 22px;
           }
   
           .keybinds-container-separator {

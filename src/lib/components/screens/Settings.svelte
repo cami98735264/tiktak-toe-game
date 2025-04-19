@@ -147,7 +147,7 @@
   .settings-options-section {
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.4rem;
     padding: 1rem;
     border-radius: 8px;
     background-color: var(--primary-light);
@@ -157,7 +157,6 @@
   .settings-options-container {
     display: flex;
     flex-direction: column;
-    gap: 4px;
   }
 
   .settings-container {

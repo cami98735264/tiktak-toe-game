@@ -231,7 +231,7 @@
 
 <main>
   <h1 class="settings-title">Opciones</h1>
-  <div class="settings-container">
+  <div class="settings-container" >
     <div class="settings-sidebar">
       {#each sidebarOptions as option, i}
         <button
@@ -278,6 +278,7 @@
     background-color: var(--primary-light);
     border: 3px solid var(--primary-dark);
     flex: 0 0 240px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
   }
@@ -317,6 +318,20 @@
     height: 100%;
     padding: 2rem;
     flex: 1;
+    animation: contentShow 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  @keyframes contentShow {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Style for focused elements in content area */
