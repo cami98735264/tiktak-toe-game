@@ -135,6 +135,7 @@
     max-width: 1000px;
     flex: 1 1 auto;
     min-height: 0;
+    padding: 1rem;
   }
 
   .player {
@@ -161,6 +162,8 @@
     padding: 0.5rem 1rem;
     border-radius: 8px;
     background-color: var(--primary);
+    width: 100%;
+    justify-content: center;
   }
 
   .player-lives {
@@ -169,6 +172,8 @@
     padding: 0.5rem;
     background-color: var(--background);
     border-radius: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .heart {
@@ -193,8 +198,8 @@
   }
 
   .game-board {
-    width: 300px;
-    height: 300px;
+    width: min(300px, 100%);
+    height: min(300px, 100vw);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -220,6 +225,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .game-tips {
@@ -231,6 +237,9 @@
     border-radius: 8px;
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
   }
 
   .tip-icon {
@@ -245,30 +254,138 @@
   .game-stats {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 1;
+    min-width: 200px;
   }
 
   .stat {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--primary);
+    border-radius: 8px;
+    color: var(--primary-content);
+    text-shadow: var(--shadow-border-light);
   }
 
   .stat-label {
     font-size: var(--font-size-small);
-    color: var(--copy-light);
-    text-shadow: var(--shadow-border-light);
+    font-weight: bold;
   }
 
   .stat-value {
-    font-size: var(--font-size-medium);
-    font-weight: bold;
-    color: var(--primary-content);
-    text-shadow: var(--shadow-border-light);
+    font-size: var(--font-size-small);
   }
 
   .person-icon {
     width: 30px;
     height: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .game-content {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0.5rem;
+    }
+
+    .player {
+      width: 100%;
+      min-width: 0;
+      padding: 1rem;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .player-name {
+      width: auto;
+    }
+
+    .player-lives {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .heart {
+      width: 24px;
+      height: 24px;
+    }
+
+    .game-board {
+      width: min(300px, calc(100vw - 2rem));
+      height: min(300px, calc(100vw - 2rem));
+    }
+
+    .footer-content {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .game-tips, .game-stats {
+      width: 100%;
+    }
+
+    .stat {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .game-layout {
+      padding: 0.5rem;
+    }
+
+    .timer {
+      padding: 0.5rem 1rem;
+    }
+
+    .timer-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .time-remaining {
+      font-size: var(--font-size-medium);
+    }
+
+    .player {
+      padding: 0.75rem;
+    }
+
+    .player-name {
+      padding: 0.25rem 0.75rem;
+    }
+
+    .player-lives {
+      padding: 0.25rem;
+      gap: 0.25rem;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+    }
+
+    .player-character {
+      padding: 0.25rem 0.75rem;
+    }
+
+    .game-board {
+      padding: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .game-footer {
+      padding: 0.5rem;
+    }
+
+    .game-tips, .stat {
+      padding: 0.5rem;
+    }
   }
 </style> 

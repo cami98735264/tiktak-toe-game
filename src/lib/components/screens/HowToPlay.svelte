@@ -17,7 +17,7 @@
     },
     {
       title: "Tiempo",
-      content: "El juego tiene un límite de tiempo de 10 minutos. Si el tiempo se agota y no hay ganador, el juego termina en empate."
+      content: "El juego tiene un límite de tiempo de 5 minutos. Si el tiempo se agota y no hay ganador, el juego termina en empate."
     },
     {
       title: "Controles",

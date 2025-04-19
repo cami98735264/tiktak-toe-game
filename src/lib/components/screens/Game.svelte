@@ -33,7 +33,7 @@
     player2Lives: 5,
     player1Character: "X",
     player2Character: "O",
-    timeRemaining: 600,
+    timeRemaining: 300,
     gameOver: false,
     winner: null
   });
@@ -295,6 +295,7 @@
     align-items: center;
     z-index: 1000;
     backdrop-filter: blur(4px);
+    padding: 1rem;
   }
 
   .question-content,
@@ -324,12 +325,16 @@
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
     font-size: var(--font-size-large);
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
   .question-content p {
     color: var(--primary-content);
     text-shadow: var(--shadow-border-light);
     font-size: var(--font-size-medium);
+    text-align: center;
+    margin-bottom: 1.5rem;
   }
 
   .options {
@@ -394,6 +399,8 @@
     animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards;
     text-shadow: var(--shadow-border-light);
     backdrop-filter: blur(4px);
+    max-width: 90%;
+    width: fit-content;
   }
 
   .notification.success {
@@ -421,6 +428,43 @@
     }
     to {
       opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .question-content,
+    .game-over-content {
+      padding: 1.5rem;
+    }
+
+    .options {
+      grid-template-columns: 1fr;
+    }
+
+    .options button {
+      padding: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .question-content,
+    .game-over-content {
+      padding: 1rem;
+      width: 95%;
+    }
+
+    .question-content h2,
+    .game-over-content h2 {
+      font-size: var(--font-size-medium);
+    }
+
+    .question-content p {
+      font-size: var(--font-size-small);
+    }
+
+    .notification {
+      padding: 0.75rem 1.5rem;
+      font-size: var(--font-size-small);
     }
   }
 </style> 

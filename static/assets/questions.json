@@ -1,152 +1,402 @@
 [
   {
-    "question": "¿Cuál es la probabilidad de obtener un 6 al lanzar un dado justo?",
-    "options": ["1/6", "1/3", "1/2", "2/3"],
+    "question": "Un campesino recolectó 230 manzanas. Si vendió 115 en la feria y regaló 40 a sus vecinos, ¿cuántas manzanas le quedaron?",
+    "options": ["65 manzanas", "75 manzanas", "85 manzanas", "95 manzanas"],
+    "correct": 1
+  },
+  {
+    "question": "En una fábrica se produjeron 560 botellas de jugo. Si 320 fueron de naranja y el resto de manzana, ¿cuántas botellas de jugo de manzana se produjeron?",
+    "options": ["220 botellas", "230 botellas", "240 botellas", "250 botellas"],
+    "correct": 2
+  },
+  {
+    "question": "Luisa tenía $75. Gastó $28 en la librería y su hermano le dio $15. ¿Cuánto dinero tiene ahora Luisa?",
+    "options": ["$52", "$62", "$72", "$82"],
+    "correct": 1
+  },
+  {
+    "question": "Un tren partió con 185 pasajeros. En la primera parada se bajaron 45 y subieron 28. ¿Cuántos pasajeros hay ahora en el tren?",
+    "options": ["158 pasajeros", "168 pasajeros", "178 pasajeros", "188 pasajeros"],
+    "correct": 1
+  },
+  {
+    "question": "Un acuario tenía 125 peces. Se vendieron 32 y se añadieron 18 peces nuevos. ¿Cuántos peces hay ahora en el acuario?",
+    "options": ["101 peces", "111 peces", "121 peces", "131 peces"],
+    "correct": 1
+  },
+  {
+    "question": "Sofía tenía 92 hojas de papel. Utilizó 38 para dibujar y le regaló 17 a su amigo. ¿Cuántas hojas de papel le quedaron a Sofía?",
+    "options": ["37 hojas", "47 hojas", "57 hojas", "67 hojas"],
     "correct": 0
   },
   {
-    "question": "Si lanzas una moneda justa dos veces, ¿cuál es la probabilidad de obtener dos caras?",
-    "options": ["1/4", "1/2", "3/4", "1"],
+    "question": "Un tanque contenía 350 litros de agua. Se usaron 165 litros para regar las plantas y 80 litros para limpiar. ¿Cuántos litros de agua quedan en el tanque?",
+    "options": ["105 litros", "115 litros", "125 litros", "135 litros"],
     "correct": 0
   },
   {
-    "question": "En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un as?",
-    "options": ["1/13", "1/4", "1/26", "1/52"],
+    "question": "Un excursionista caminó 65 km en total. La primera parte recorrió 28 km y la segunda 22 km. ¿Cuántos kilómetros le faltan por recorrer?",
+    "options": ["10 km", "15 km", "20 km", "25 km"],
+    "correct": 1
+  },
+  {
+    "question": "En una caja había 144 crayones. Se sacaron 56 para colorear y se añadieron 24 crayones nuevos. ¿Cuántos crayones hay ahora en la caja?",
+    "options": ["102 crayones", "112 crayones", "122 crayones", "132 crayones"],
+    "correct": 1
+  },
+  {
+    "question": "Mateo tenía 210 canicas. Perdió 75 jugando y luego ganó 35. ¿Cuántas canicas tiene ahora Mateo?",
+    "options": ["160 canicas", "170 canicas", "180 canicas", "190 canicas"],
+    "correct": 1
+  },
+  {
+    "question": "Una biblioteca tenía 420 libros. Se prestaron 150 novelas y se devolvieron 85 libros de historia. ¿Cuántos libros hay ahora en la biblioteca?",
+    "options": ["355 libros", "365 libros", "375 libros", "385 libros"],
     "correct": 0
   },
   {
-    "question": "Si tienes una bolsa con 3 bolas rojas y 2 azules, ¿cuál es la probabilidad de sacar una bola roja?",
-    "options": ["3/5", "2/5", "1/2", "1/3"],
+    "question": "Un granjero tenía 135 aves entre gallinas y patos. Si vendió 42 gallinas y compró 25 patos, ¿cuántas aves tiene ahora el granjero?",
+    "options": ["118 aves", "128 aves", "138 aves", "148 aves"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar dos dados la suma sea 7?",
-    "options": ["1/6", "1/12", "1/36", "1/18"],
+    "question": "Daniel ahorró $155. Gastó $68 en herramientas y recibió $30 por un trabajo. ¿Cuánto dinero tiene ahora Daniel?",
+    "options": ["$107", "$117", "$127", "$137"],
+    "correct": 1
+  },
+  {
+    "question": "Una panadera preparó 280 galletas. Vendió 195 en la mañana y horneó 60 más en la tarde. ¿Cuántas galletas tiene ahora?",
+    "options": ["145 galletas", "155 galletas", "165 galletas", "175 galletas"],
     "correct": 0
   },
   {
-    "question": "En una ruleta con 37 números (0-36), ¿cuál es la probabilidad de que salga un número par?",
-    "options": ["18/37", "1/2", "19/37", "17/37"],
+    "question": "Una tienda de flores tenía 180 claveles. Vendió 75 rojos y recibió un pedido de 45 claveles blancos. ¿Cuántos claveles tiene ahora la tienda?",
+    "options": ["140 claveles", "150 claveles", "160 claveles", "170 claveles"],
+    "correct": 1
+  },
+  {
+    "question": "En un lago había 94 cisnes. Se fueron volando 27 y llegaron 15 más. ¿Cuántos cisnes hay ahora en el lago?",
+    "options": ["72 cisnes", "82 cisnes", "92 cisnes", "102 cisnes"],
+    "correct": 1
+  },
+  {
+    "question": "Carolina tenía $120. Compró una falda por $45 y encontró $18 en su bolsillo. ¿Cuánto dinero tiene ahora Carolina?",
+    "options": ["$83", "$93", "$103", "$113"],
+    "correct": 1
+  },
+  {
+    "question": "Una fábrica ensambló 410 bicicletas. Se enviaron 230 a las tiendas y se devolvieron 35 por fallas. ¿Cuántas bicicletas buenas quedan en la fábrica?",
+    "options": ["145 bicicletas", "155 bicicletas", "165 bicicletas", "175 bicicletas"],
     "correct": 0
   },
   {
-    "question": "Si tienes 5 llaves y solo una abre la puerta, ¿cuál es la probabilidad de abrir la puerta al primer intento?",
-    "options": ["1/5", "1/4", "1/3", "1/2"],
+    "question": "Andrés horneó 72 panecillos. Se comieron 39 en el desayuno y horneó 28 más para la cena. ¿Cuántos panecillos hay ahora?",
+    "options": ["51 panecillos", "61 panecillos", "71 panecillos", "81 panecillos"],
+    "correct": 1
+  },
+  {
+    "question": "Un camión transportaba 150 cajas de frutas. Dejó 65 en un supermercado y recogió 20 cajas en una finca. ¿Cuántas cajas hay ahora en el camión?",
+    "options": ["95 cajas", "105 cajas", "115 cajas", "125 cajas"],
+    "correct": 1
+  },
+  {
+    "question": "Isabel tenía 160 fotografías digitales. Imprimió 55 para un álbum y tomó 30 fotos nuevas con su cámara. ¿Cuántas fotos tiene ahora Isabel?",
+    "options": ["135 fotos", "145 fotos", "155 fotos", "165 fotos"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar una moneda tres veces salga al menos una cara?",
-    "options": ["7/8", "1/2", "3/4", "1/8"],
+    "question": "Un vivero tenía 250 plántulas. Se vendieron 135 y se cultivaron 60 más. ¿Cuántas plántulas tiene ahora el vivero?",
+    "options": ["165 plántulas", "175 plántulas", "185 plántulas", "195 plántulas"],
+    "correct": 1
+  },
+  {
+    "question": "En un teatro había 320 butacas. Se ocuparon 215 para la función de la tarde y llegaron 40 personas más para la noche. ¿Cuántas personas vieron la función de la noche?",
+    "options": ["255 personas", "265 personas", "275 personas", "285 personas"],
     "correct": 0
   },
   {
-    "question": "En una clase de 30 estudiantes, 18 son mujeres. ¿Cuál es la probabilidad de seleccionar al azar un hombre?",
-    "options": ["2/5", "3/5", "1/2", "1/3"],
+    "question": "Laura compró 5 docenas de huevos. Usó 27 para hacer un pastel y se le dañaron 9. ¿Cuántos huevos le quedan?",
+    "options": ["24 huevos", "26 huevos", "28 huevos", "30 huevos"],
     "correct": 0
   },
   {
-    "question": "Si tienes una bolsa con 4 bolas blancas y 6 negras, ¿cuál es la probabilidad de sacar dos bolas blancas seguidas sin reemplazo?",
-    "options": ["2/15", "4/25", "1/5", "3/10"],
+    "question": "Un avión despegó con 310 pasajeros. En la escala se bajaron 85 y subieron 52. ¿Cuántos pasajeros continuaron el viaje?",
+    "options": ["267 pasajeros", "277 pasajeros", "287 pasajeros", "297 pasajeros"],
+    "correct": 1
+  },
+  {
+    "question": "Ricardo tenía 190 sellos en su colección. Encontró 48 nuevos pero intercambió 23 con un amigo. ¿Cuántos sellos tiene ahora Ricardo?",
+    "options": ["205 sellos", "215 sellos", "225 sellos", "235 sellos"],
+    "correct": 1
+  },
+  {
+    "question": "Un estanque contenía 450 litros de agua para riego. Se usaron 180 litros en la mañana y se agregaron 110 litros en la tarde. ¿Cuántos litros de agua hay ahora en el estanque?",
+    "options": ["360 litros", "370 litros", "380 litros", "390 litros"],
+    "correct": 2
+  },
+  {
+    "question": "Valentina leyó un libro de 250 páginas. La primera semana leyó 85 páginas y la segunda 70. ¿Cuántas páginas le faltan por leer?",
+    "options": ["85 páginas", "95 páginas", "105 páginas", "115 páginas"],
+    "correct": 1
+  },
+  {
+    "question": "Un equipo de fútbol anotó 112 puntos en un torneo. Si en la primera ronda hicieron 68 puntos, ¿cuántos puntos anotaron en la segunda ronda?",
+    "options": ["34 puntos", "44 puntos", "54 puntos", "64 puntos"],
+    "correct": 1
+  },
+  {
+    "question": "Una banda musical tenía 35 integrantes. Se unieron 8 nuevos miembros y se retiraron 5. ¿Cuántos integrantes tiene ahora la banda?",
+    "options": ["38 integrantes", "48 integrantes", "58 integrantes", "68 integrantes"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar un dado salga un número mayor que 4?",
-    "options": ["1/3", "1/2", "2/3", "1/6"],
+    "question": "Un almacén tenía 620 cajas. Se vendieron 275 y llegaron 150 nuevas. ¿Cuántas cajas hay ahora en el almacén?",
+    "options": ["485 cajas", "495 cajas", "505 cajas", "515 cajas"],
+    "correct": 1
+  },
+  {
+    "question": "Una costurera tenía 15 metros de tela. Usó 6.5 metros para un vestido y compró 3 metros más. ¿Cuántos metros de tela tiene ahora?",
+    "options": ["10.5 metros", "11.5 metros", "12.5 metros", "13.5 metros"],
+    "correct": 1
+  },
+  {
+    "question": "En un zoológico había 85 monos. Trasladaron 18 a otra área y nacieron 12 crías. ¿Cuántos monos hay ahora en su área original?",
+    "options": ["79 monos", "89 monos", "99 monos", "109 monos"],
     "correct": 0
   },
   {
-    "question": "En una lotería con 1000 boletos, si compras 10, ¿cuál es la probabilidad de ganar?",
-    "options": ["1/100", "1/10", "1/50", "1/20"],
+    "question": "Un estudiante tenía $95 para sus gastos. Compró materiales por $32 y recibió $25 de su padre. ¿Cuánto dinero le queda?",
+    "options": ["$78", "$88", "$98", "$108"],
+    "correct": 1
+  },
+  {
+    "question": "Un cocinero preparó 180 empanadas. Vendió 112 en el local y preparó 45 más para un evento. ¿Cuántas empanadas tiene ahora?",
+    "options": ["103 empanadas", "113 empanadas", "123 empanadas", "133 empanadas"],
+    "correct": 1
+  },
+  {
+    "question": "Una librería tenía 210 libros de aventura. Vendió 85 y recibió 60 libros nuevos de otros géneros. ¿Cuántos libros de aventura tiene ahora?",
+    "options": ["125 libros", "135 libros", "145 libros", "155 libros"],
     "correct": 0
   },
   {
-    "question": "Si tienes una bolsa con 5 bolas rojas, 3 verdes y 2 azules, ¿cuál es la probabilidad de sacar una bola que no sea roja?",
-    "options": ["1/2", "3/5", "2/5", "1/3"],
+    "question": "En un panal había 345 abejas. Salieron 120 a recolectar polen y regresaron 95. ¿Cuántas abejas hay ahora en el panal?",
+    "options": ["310 abejas", "320 abejas", "330 abejas", "340 abejas"],
+    "correct": 1
+  },
+  {
+    "question": "Un atleta corrió 42 km en una semana. El lunes corrió 8.5 km y el martes 6 km. ¿Cuántos kilómetros le faltan por correr en la semana?",
+    "options": ["27.5 km", "28.5 km", "29.5 km", "30.5 km"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar dos monedas salga al menos una cruz?",
-    "options": ["3/4", "1/2", "1/4", "1"],
+    "question": "Una caja contenía 96 bombones. Se consumieron 41 y se añadieron 28 bombones de otro tipo. ¿Cuántos bombones hay ahora en la caja?",
+    "options": ["73 bombones", "83 bombones", "93 bombones", "83 bombones"],
+    "correct": 1
+  },
+  {
+    "question": "Un niño tenía 175 canicas pequeñas. Regaló 62 a su amigo y ganó 30 canicas grandes en un juego. ¿Cuántas canicas pequeñas tiene ahora?",
+    "options": ["113 canicas", "123 canicas", "133 canicas", "143 canicas"],
     "correct": 0
   },
   {
-    "question": "En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un corazón o un as?",
-    "options": ["16/52", "13/52", "17/52", "4/52"],
+    "question": "Una escuela tenía 530 estudiantes. Se graduaron 85 y se inscribieron 112 alumnos nuevos. ¿Cuántos estudiantes hay ahora en la escuela?",
+    "options": ["547 estudiantes", "557 estudiantes", "567 estudiantes", "577 estudiantes"],
+    "correct": 1
+  },
+  {
+    "question": "Un agricultor sembró 315 semillas de maíz. Germinaron 240 y luego plantó 50 semillas de frijol. ¿Cuántas semillas de maíz tiene ahora (germinadas y sin germinar)?",
+    "options": ["295 semillas", "305 semillas", "315 semillas", "325 semillas"],
+    "correct": 2
+  },
+  {
+    "question": "En un concierto había 480 personas. Se fueron 135 durante el descanso y entraron 90 para la segunda parte. ¿Cuántas personas vieron la segunda parte del concierto?",
+    "options": ["435 personas", "445 personas", "455 personas", "465 personas"],
     "correct": 0
   },
   {
-    "question": "Si tienes una bolsa con 8 bolas numeradas del 1 al 8, ¿cuál es la probabilidad de sacar un número primo?",
-    "options": ["1/2", "3/8", "5/8", "1/4"],
+    "question": "Una modista compró 7 docenas de botones. Usó 39 para unas camisas y perdió 15. ¿Cuántos botones le quedan?",
+    "options": ["30 botones", "40 botones", "50 botones", "60 botones"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar un dado salga un número par o mayor que 3?",
-    "options": ["2/3", "1/2", "5/6", "1/3"],
+    "question": "Un autobús escolar recogió 65 niños en la primera parada y 48 en la segunda. En la escuela se bajaron 72. ¿Cuántos niños quedaron en el autobús?",
+    "options": ["31 niños", "41 niños", "51 niños", "61 niños"],
+    "correct": 1
+  },
+  {
+    "question": "Un coleccionista tenía 250 postales. Compró 65 más en un viaje y vendió 30 repetidas. ¿Cuántas postales tiene ahora el coleccionista?",
+    "options": ["275 postales", "285 postales", "295 postales", "305 postales"],
+    "correct": 1
+  },
+  {
+    "question": "Un depósito contenía 520 litros de pintura. Se usaron 210 para pintar una casa y se añadieron 150 litros de otro color. ¿Cuántos litros de pintura hay ahora?",
+    "options": ["450 litros", "460 litros", "470 litros", "480 litros"],
+    "correct": 1
+  },
+  {
+    "question": "Un cartero tenía que entregar 380 cartas. Por la mañana entregó 195 y por la tarde 120. ¿Cuántas cartas le faltan por entregar?",
+    "options": ["55 cartas", "65 cartas", "75 cartas", "85 cartas"],
+    "correct": 1
+  },
+  {
+    "question": "Un jugador de bolos hizo 185 puntos en dos juegos. En el primer juego hizo 92 puntos. ¿Cuántos puntos hizo en el segundo juego?",
+    "options": ["83 puntos", "93 puntos", "103 puntos", "113 puntos"],
+    "correct": 1
+  },
+  {
+    "question": "Una compañía de teatro tenía 45 actores. Contrataron 12 actores más y 7 se fueron a trabajar en otra obra. ¿Cuántos actores tiene ahora la compañía?",
+    "options": ["50 actores", "60 actores", "70 actores", "40 actores"],
     "correct": 0
   },
   {
-    "question": "En una clase de 40 estudiantes, 25 aprobaron matemáticas y 30 aprobaron física. Si 20 aprobaron ambas, ¿cuál es la probabilidad de que un estudiante seleccionado al azar haya aprobado al menos una de las dos?",
-    "options": ["7/8", "3/4", "5/8", "1/2"],
+    "question": "Un supermercado tenía 750 manzanas. Se vendieron 315 y llegaron 200 más. ¿Cuántas manzanas hay ahora en el supermercado?",
+    "options": ["635 manzanas", "645 manzanas", "655 manzanas", "665 manzanas"],
     "correct": 0
   },
   {
-    "question": "Si tienes una bolsa con 6 bolas rojas y 4 azules, ¿cuál es la probabilidad de sacar dos bolas del mismo color sin reemplazo?",
-    "options": ["7/15", "1/3", "2/5", "3/10"],
+    "question": "Una tejedora tenía 250 metros de lana. Usó 115 metros para una cobija y compró 80 metros más. ¿Cuántos metros de lana tiene ahora?",
+    "options": ["205 metros", "215 metros", "225 metros", "235 metros"],
+    "correct": 1
+  },
+  {
+    "question": "En un jardín había 130 tulipanes. Se cortaron 45 para un ramo y florecieron 30 más. ¿Cuántos tulipanes hay ahora en el jardín?",
+    "options": ["105 tulipanes", "115 tulipanes", "125 tulipanes", "135 tulipanes"],
+    "correct": 1
+  },
+  {
+    "question": "Un pastelero horneó 96 magdalenas. Vendió 53 en la mañana y horneó 24 más por la tarde. ¿Cuántas magdalenas tiene ahora?",
+    "options": ["67 magdalenas", "77 magdalenas", "87 magdalenas", "97 magdalenas"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar tres monedas salgan exactamente dos caras?",
-    "options": ["3/8", "1/2", "1/4", "1/8"],
+    "question": "Una ferretería tenía 320 clavos. Se vendieron 145 y llegaron 90 clavos nuevos. ¿Cuántos clavos hay ahora en la ferretería?",
+    "options": ["255 clavos", "265 clavos", "275 clavos", "285 clavos"],
+    "correct": 1
+  },
+  {
+    "question": "Un granjero recogió 180 huevos. Vendió 95 en el mercado y las gallinas pusieron 40 huevos más. ¿Cuántos huevos tiene ahora el granjero?",
+    "options": ["115 huevos", "125 huevos", "135 huevos", "145 huevos"],
+    "correct": 1
+  },
+  {
+    "question": "Una costurera tenía 55 metros de cinta. Usó 28 metros para decorar y compró 15 metros más. ¿Cuántos metros de cinta tiene ahora?",
+    "options": ["32 metros", "42 metros", "52 metros", "62 metros"],
+    "correct": 1
+  },
+  {
+    "question": "En un acuario pequeño había 48 peces. Se regalaron 15 y se compraron 8 peces de otra especie. ¿Cuántos peces hay ahora en el acuario pequeño?",
+    "options": ["31 peces", "41 peces", "51 peces", "61 peces"],
+    "correct": 1
+  },
+  {
+    "question": "Un estudiante tenía $40. Gastó $13 en un cuaderno y su papá le dio $20. ¿Cuánto dinero tiene ahora el estudiante?",
+    "options": ["$47", "$57", "$67", "$77"],
     "correct": 0
   },
   {
-    "question": "En una bolsa hay 10 bolas: 4 rojas, 3 verdes y 3 azules. ¿Cuál es la probabilidad de sacar una bola que no sea azul?",
-    "options": ["7/10", "3/10", "4/10", "6/10"],
+    "question": "Un autobús comenzó su ruta con 25 pasajeros. En la primera parada subieron 12 y en la segunda se bajaron 7. ¿Cuántos pasajeros hay ahora en el autobús?",
+    "options": ["20 pasajeros", "30 pasajeros", "40 pasajeros", "50 pasajeros"],
+    "correct": 1
+  },
+  {
+    "question": "Una tienda de mascotas tenía 70 pájaros. Se vendieron 25 y llegaron 18 pájaros nuevos. ¿Cuántos pájaros hay ahora en la tienda?",
+    "options": ["53 pájaros", "63 pájaros", "73 pájaros", "83 pájaros"],
+    "correct": 1
+  },
+  {
+    "question": "Laura tenía 110 pegatinas. Usó 40 para decorar su álbum y su amiga le regaló 25. ¿Cuántas pegatinas tiene ahora Laura?",
+    "options": ["85 pegatinas", "95 pegatinas", "105 pegatinas", "115 pegatinas"],
+    "correct": 1
+  },
+  {
+    "question": "Un depósito contenía 280 litros de aceite de oliva. Se usaron 130 litros para cocinar y se añadieron 75 litros nuevos. ¿Cuántos litros de aceite quedan en el depósito?",
+    "options": ["215 litros", "225 litros", "235 litros", "245 litros"],
+    "correct": 1
+  },
+  {
+    "question": "Un ciclista planeaba recorrer 50 km. La primera hora hizo 18 km y la segunda 15 km. ¿Cuántos kilómetros le faltan por recorrer?",
+    "options": ["17 km", "27 km", "37 km", "47 km"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar dos dados la suma sea mayor que 9?",
-    "options": ["1/6", "1/4", "1/3", "1/2"],
+    "question": "En una caja había 60 lápices de colores. Se sacaron 22 para dibujar y se añadieron 14 lápices nuevos. ¿Cuántos lápices hay ahora en la caja?",
+    "options": ["42 lápices", "52 lápices", "62 lápices", "72 lápices"],
+    "correct": 1
+  },
+  {
+    "question": "Pedro tenía 150 canicas. Perdió 45 jugando y luego ganó 28. ¿Cuántas canicas tiene Pedro ahora?",
+    "options": ["123 canicas", "133 canicas", "143 canicas", "153 canicas"],
+    "correct": 1
+  },
+  {
+    "question": "Una biblioteca tenía 350 libros infantiles. Se prestaron 110 y se devolvieron 55 libros de otros géneros. ¿Cuántos libros infantiles hay ahora en la biblioteca?",
+    "options": ["295 libros", "305 libros", "240 libros", "325 libros"],
+    "correct": 2
+  },
+  {
+    "question": "Un granjero tenía 90 conejos. Se vendieron 32 y nacieron 18 conejitos. ¿Cuántos conejos tiene ahora el granjero?",
+    "options": ["66 conejos", "76 conejos", "86 conejos", "96 conejos"],
+    "correct": 1
+  },
+  {
+    "question": "Sara ahorró $120. Gastó $48 en un regalo y recibió $25 de su tía. ¿Cuánto dinero tiene ahora Sara?",
+    "options": ["$87", "$97", "$107", "$117"],
+    "correct": 1
+  },
+  {
+    "question": "Un panadero hizo 150 donas. Vendió 85 por la mañana y regaló 20 a sus amigos. ¿Cuántas donas le quedaron?",
+    "options": ["35 donas", "45 donas", "55 donas", "65 donas"],
+    "correct": 1
+  },
+  {
+    "question": "Una floristería tenía 140 margaritas. Vendió 55 blancas y se añadieron 30 margaritas amarillas. ¿Cuántas margaritas tiene ahora la floristería?",
+    "options": ["115 margaritas", "125 margaritas", "135 margaritas", "145 margaritas"],
     "correct": 0
   },
   {
-    "question": "En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar una carta que sea un corazón o una figura?",
-    "options": ["11/26", "1/2", "7/13", "3/4"],
+    "question": "En un parque había 72 ardillas. Se fueron 18 y llegaron 11 más. ¿Cuántas ardillas hay ahora en el parque?",
+    "options": ["55 ardillas", "65 ardillas", "75 ardillas", "85 ardillas"],
+    "correct": 1
+  },
+  {
+    "question": "Marcos tenía $55. Compró un libro por $18 y luego encontró $7 en la calle. ¿Cuánto dinero tiene ahora Marcos?",
+    "options": ["$34", "$44", "$54", "$64"],
+    "correct": 1
+  },
+  {
+    "question": "Una fábrica produjo 300 pelotas. Se enviaron 120 a una juguetería y se devolvieron 15 pelotas defectuosas. ¿Cuántas pelotas buenas quedan en la fábrica?",
+    "options": ["165 pelotas", "175 pelotas", "185 pelotas", "195 pelotas"],
     "correct": 0
   },
   {
-    "question": "Si tienes una bolsa con 5 bolas blancas y 7 negras, ¿cuál es la probabilidad de sacar dos bolas de diferente color sin reemplazo?",
-    "options": ["35/66", "1/2", "5/12", "7/12"],
+    "question": "Ana horneó 80 galletas de chocolate. Se comieron 35 en la merienda y horneó 18 más de vainilla. ¿Cuántas galletas de chocolate hay ahora?",
+    "options": ["45 galletas", "53 galletas", "63 galletas", "73 galletas"],
     "correct": 0
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar un dado salga un número menor que 5 o mayor que 2?",
-    "options": ["5/6", "2/3", "1/2", "1/3"],
-    "correct": 0
+    "question": "Un camión transportaba 110 cajas de herramientas. Dejó 42 en una construcción y recogió 25 cajas más. ¿Cuántas cajas hay ahora en el camión?",
+    "options": ["83 cajas", "93 cajas", "103 cajas", "113 cajas"],
+    "correct": 1
   },
   {
-    "question": "En una clase de 50 estudiantes, 30 estudian inglés y 25 estudian francés. Si 10 estudian ambos, ¿cuál es la probabilidad de que un estudiante seleccionado al azar estudie al menos uno de los dos idiomas?",
-    "options": ["9/10", "4/5", "3/4", "2/3"],
-    "correct": 0
+    "question": "Raúl tenía 95 fotos en su teléfono. Borró 28 que estaban borrosas e hizo 15 fotos nuevas. ¿Cuántas fotos tiene ahora Raúl?",
+    "options": ["72 fotos", "82 fotos", "92 fotos", "102 fotos"],
+    "correct": 1
   },
   {
-    "question": "Si tienes una bolsa con 6 bolas rojas y 4 verdes, ¿cuál es la probabilidad de sacar dos bolas rojas con reemplazo?",
-    "options": ["9/25", "1/3", "2/5", "3/10"],
-    "correct": 0
+    "question": "Un vivero plantó 200 semillas de flores. Germinaron 130 y se añadieron 40 semillas más de árboles. ¿Cuántas semillas de flores tiene ahora el vivero (germinadas y sin germinar)?",
+    "options": ["170 semillas", "180 semillas", "200 semillas", "190 semillas"],
+    "correct": 2
   },
   {
-    "question": "¿Cuál es la probabilidad de que al lanzar cuatro monedas salgan exactamente tres caras?",
-    "options": ["1/4", "1/2", "3/8", "1/8"],
-    "correct": 0
+    "question": "En una clase, 2/5 de los estudiantes son niños. ¿Qué porcentaje de los estudiantes son niñas?",
+    "options": ["30%", "40%", "50%", "60%"],
+    "correct": 3
   },
   {
-    "question": "En una bolsa hay 12 bolas: 5 rojas, 4 verdes y 3 azules. ¿Cuál es la probabilidad de sacar una bola que no sea verde?",
-    "options": ["2/3", "1/3", "5/12", "7/12"],
-    "correct": 0
-  },
-  {
-    "question": "¿Cuál es la probabilidad de que al lanzar dos dados la suma sea un número primo?",
-    "options": ["5/12", "1/3", "1/2", "7/12"],
-    "correct": 0
+    "question": "Un pastel se dividió en 8 porciones iguales. Si se comieron el 25% del pastel, ¿cuántas porciones quedaron?",
+    "options": ["2 porciones", "4 porciones", "6 porciones", "8 porciones"],
+    "correct": 2
   }
-] 
+]
