@@ -15,6 +15,9 @@
   // Audio elements
   let backgroundMusic: HTMLAudioElement;
   let clickAudio: HTMLAudioElement;
+  let audioContext: AudioContext | null = null;
+  let backgroundMusicBuffer: AudioBuffer | null = null;
+  let backgroundMusicSource: AudioBufferSourceNode | null = null;
   let audioInitialized = false;
 
   $effect(() => {
@@ -83,16 +86,58 @@
     };
   });
 
+  async function loadAudioBuffer(url: string): Promise<AudioBuffer> {
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    return await audioContext!.decodeAudioData(arrayBuffer);
+  }
+
   function initializeAudio() {
-    if (!audioInitialized && backgroundMusic) {
+    if (!audioInitialized) {
       audioInitialized = true;
       if (pref.audio.music.enable) {
-        backgroundMusic.volume = pref.audio.music.volume / 100;
-        backgroundMusic.muted = false;
-        backgroundMusic.play().catch(err => {
-          console.error("Failed to play background music:", err);
-        });
+        // Create audio context if it doesn't exist
+        if (!audioContext) {
+          audioContext = new AudioContext();
+        }
+
+        // Load and play the background music
+        loadAudioBuffer(getAssetUrl("audios.backgroundMusic"))
+          .then(buffer => {
+            backgroundMusicBuffer = buffer;
+            playBackgroundMusic();
+          })
+          .catch(err => {
+            console.error("Failed to load background music:", err);
+          });
       }
+    }
+  }
+
+  function playBackgroundMusic() {
+    if (!audioContext || !backgroundMusicBuffer || !pref.audio.music.enable) return;
+
+    // Create a new source node
+    backgroundMusicSource = audioContext.createBufferSource();
+    backgroundMusicSource.buffer = backgroundMusicBuffer;
+    backgroundMusicSource.loop = true;
+
+    // Create a gain node for volume control
+    const gainNode = audioContext.createGain();
+    gainNode.gain.value = pref.audio.music.volume / 100;
+
+    // Connect the nodes
+    backgroundMusicSource.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    // Start playing
+    backgroundMusicSource.start(0);
+
+    // Handle audio context state
+    if (audioContext.state === 'suspended') {
+      audioContext.resume().catch(err => {
+        console.error("Failed to resume audio context:", err);
+      });
     }
   }
 
@@ -122,6 +167,16 @@
         document.removeEventListener(event, initializeAudio);
       });
       document.removeEventListener("click", clickHandler);
+
+      // Clean up audio resources
+      if (backgroundMusicSource) {
+        backgroundMusicSource.stop();
+        backgroundMusicSource = null;
+      }
+      if (audioContext) {
+        audioContext.close();
+        audioContext = null;
+      }
     };
   });
 
