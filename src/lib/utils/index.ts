@@ -104,24 +104,38 @@ function playAudio(pref: any, audioPath: string): void {
   }
   audioPlayTimes[audioPath] = now;
   
-  // Get or create an audio element
-  let audioElement: HTMLAudioElement;
-  const existingAudio = document.getElementById(`temp-audio-${audioPath}`) as HTMLAudioElement;
+  // Create audio context if it doesn't exist
+  const audioContext = new AudioContext();
   
-  if (existingAudio) {
-    audioElement = existingAudio;
-  } else {
-    audioElement = new Audio(audioPath);
-    audioElement.id = `temp-audio-${audioPath}`;
-    document.body.appendChild(audioElement);
-  }
-  
-  // Configure and play
-  audioElement.volume = pref.audio.effects.volume / 100;
-  audioElement.currentTime = 0;
-  
-  audioElement.play().catch(err => {
-    console.error("Failed to play audio:", err);
-  });
+  // Load and play the audio
+  fetch(audioPath)
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+    .then(audioBuffer => {
+      const source = audioContext.createBufferSource();
+      source.buffer = audioBuffer;
+      
+      // Create gain node for volume control
+      const gainNode = audioContext.createGain();
+      gainNode.gain.value = pref.audio.effects.volume / 100;
+      
+      // Connect nodes
+      source.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Start playing
+      source.start(0);
+      
+      // Clean up after playback
+      source.onended = () => {
+        source.disconnect();
+        gainNode.disconnect();
+        audioContext.close();
+      };
+    })
+    .catch(err => {
+      console.error("Failed to play audio:", err);
+      audioContext.close();
+    });
 }
 export { getAssetUrl, handleChangeScreen, handleChangePreferences, playAudio };

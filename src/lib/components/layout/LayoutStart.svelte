@@ -2,10 +2,14 @@
     import type { MainMenuProps } from "$lib/types";
     import type { Snippet } from "svelte";
     import { onMount } from "svelte";
+    import { preferences } from "$lib/stores/preferences";
+    import { get } from "svelte/store";
+    import { playAudio, getAssetUrl } from "$lib/utils/index";
 
     let { gameLogoPath, children }: Omit<MainMenuProps, 'menuOptions'> & { children: Snippet } = $props();
     let focusedOptionIndex = 0;
     let menuOptions: HTMLButtonElement[] = [];
+    let pref = $state(get(preferences));
 
     // Key-to-keybind mapping
     const keyMapping: Record<string, number> = {
@@ -22,16 +26,10 @@
     // Handle menu navigation
     function handleMenuNavigation(event: KeyboardEvent): void {
         const key = event.key.toLowerCase();
-        const clickAudio = document.querySelector('#click-audio') as HTMLAudioElement;
         // Skip if no menu options are available
         if (menuOptions.length === 0) return;
         if (key === 'arrowdown' || key === 's' || key === 'arrowup' || key === 'w') {
-            if (clickAudio) {
-                clickAudio.currentTime = 0; // Reset audio to start
-                clickAudio.play().catch(err => {
-                    console.error("Failed to play click sound:", err);
-                });
-            }
+            playAudio(pref, getAssetUrl("audios.click"));
         }
         if (key === 'arrowdown' || key === 's') {
             event.preventDefault();

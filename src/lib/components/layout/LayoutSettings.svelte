@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { handleChangeScreen, playAudio } from "$lib/utils/index";
+  import { handleChangeScreen, playAudio, getAssetUrl } from "$lib/utils/index";
   import { onMount } from "svelte";
   import { preferences } from "$lib/stores/preferences";
   import { get } from "svelte/store";
@@ -50,7 +50,7 @@
         key === "enter")
     ) {
       const pref = get(preferences);
-      playAudio(pref, (document.getElementById("click-audio") as HTMLAudioElement)?.src || "");
+      playAudio(pref, getAssetUrl("audios.click"));
       lastAudioPlayTime = now;
     }
 

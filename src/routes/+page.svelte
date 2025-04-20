@@ -108,15 +108,24 @@
           audioContext = new AudioContext();
         }
 
-        // Load and play the background music
-        loadAudioBuffer(getAssetUrl("audios.backgroundMusic"))
-          .then(buffer => {
-            backgroundMusicBuffer = buffer;
-            playBackgroundMusic();
-          })
-          .catch(err => {
-            console.error("Failed to load background music:", err);
-          });
+        // First ensure audio context is resumed
+        audioContext.resume().then(() => {
+          // Then load and play the background music
+          loadAudioBuffer(getAssetUrl("audios.backgroundMusic"))
+            .then(buffer => {
+              backgroundMusicBuffer = buffer;
+              playBackgroundMusic();
+            })
+            .catch(err => {
+              console.error("Failed to load background music:", err);
+              // Reset initialization flag on failure to allow retry
+              audioInitialized = false;
+            });
+        }).catch(err => {
+          console.error("Failed to resume audio context:", err);
+          // Reset initialization flag on failure to allow retry
+          audioInitialized = false;
+        });
       }
     }
   }
@@ -124,27 +133,26 @@
   function playBackgroundMusic() {
     if (!audioContext || !backgroundMusicBuffer || !pref.audio.music.enable) return;
 
-    // Create a new source node
-    backgroundMusicSource = audioContext.createBufferSource();
-    backgroundMusicSource.buffer = backgroundMusicBuffer;
-    backgroundMusicSource.loop = true;
+    try {
+      // Create a new source node
+      backgroundMusicSource = audioContext.createBufferSource();
+      backgroundMusicSource.buffer = backgroundMusicBuffer;
+      backgroundMusicSource.loop = true;
 
-    // Create a gain node for volume control
-    gainNode = audioContext.createGain();
-    gainNode.gain.value = pref.audio.music.volume / 100;
+      // Create a gain node for volume control
+      gainNode = audioContext.createGain();
+      gainNode.gain.value = pref.audio.music.volume / 100;
 
-    // Connect the nodes
-    backgroundMusicSource.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+      // Connect the nodes
+      backgroundMusicSource.connect(gainNode);
+      gainNode.connect(audioContext.destination);
 
-    // Start playing
-    backgroundMusicSource.start(0);
-
-    // Handle audio context state
-    if (audioContext.state === 'suspended') {
-      audioContext.resume().catch(err => {
-        console.error("Failed to resume audio context:", err);
-      });
+      // Start playing
+      backgroundMusicSource.start(0);
+    } catch (err) {
+      console.error("Failed to play background music:", err);
+      // Reset initialization flag on failure to allow retry
+      audioInitialized = false;
     }
   }
 
@@ -152,13 +160,17 @@
     if (pref.audio.music.enable) {
       if (!audioInitialized) {
         initializeAudio();
-      } else {
+      } else if (!backgroundMusicSource) {
         // If music was previously stopped, restart it
-        if (!backgroundMusicSource) {
-          playBackgroundMusic();
+        if (audioContext) {
+          audioContext.resume().then(() => {
+            playBackgroundMusic();
+          }).catch(err => {
+            console.error("Failed to resume audio context:", err);
+          });
         }
-        updateMusicVolume(pref.audio.music.volume);
       }
+      updateMusicVolume(pref.audio.music.volume);
     } else if (backgroundMusicSource) {
       // Stop music if disabled
       backgroundMusicSource.stop();
@@ -169,10 +181,53 @@
 
   onMount(() => {
     // Set up various user interaction events to initialize audio
-    const interactionEvents = ['click', 'touchstart', 'keydown'];
+    const interactionEvents = [
+      'click', 
+      'touchstart', 
+      'keydown',
+      'mousedown',
+      'pointerdown',
+      'touchend',
+      'mouseup',
+      'touchmove',
+      'scroll',
+      'wheel'
+    ];
+    
+    // Create a single initialization function that can be called multiple times
+    const initializeAudioOnce = () => {
+      if (!audioInitialized) {
+        // Force audio context creation if it doesn't exist
+        if (!audioContext) {
+          audioContext = new AudioContext();
+        }
+        
+        // Try to resume audio context
+        if (audioContext.state === 'suspended') {
+          audioContext.resume().then(() => {
+            initializeAudio();
+          }).catch(err => {
+            console.error("Failed to resume audio context:", err);
+            audioInitialized = false;
+          });
+        } else {
+          initializeAudio();
+        }
+      }
+    };
+
+    // Add all event listeners with passive option for better performance
     interactionEvents.forEach(event => {
-      document.addEventListener(event, initializeAudio, { once: true });
+      document.addEventListener(event, initializeAudioOnce, { 
+        passive: true,
+        capture: true // Use capture phase to catch events earlier
+      });
     });
+
+    // Also try to initialize on page load
+    if (typeof window !== 'undefined') {
+      window.addEventListener('load', initializeAudioOnce, { once: true });
+    }
     
     // Enhanced click handler with event stopping
     const clickHandler = (event: MouseEvent) => {
@@ -180,7 +235,9 @@
       if (target.tagName === "BUTTON") {
         // Stop event propagation to prevent multiple triggers
         event.stopPropagation();
-        playAudio(pref, getAssetUrl("audios.click"));
+        if (pref.audio.effects.enable) {
+          playAudio(pref, getAssetUrl("audios.click"));
+        }
       }
     };
     
@@ -188,10 +245,12 @@
     
     return () => {
       // Clean up all event listeners
-      const interactionEvents = ['click', 'touchstart', 'keydown'];
       interactionEvents.forEach(event => {
-        document.removeEventListener(event, initializeAudio);
+        document.removeEventListener(event, initializeAudioOnce, { capture: true });
       });
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('load', initializeAudioOnce);
+      }
       document.removeEventListener("click", clickHandler);
 
       // Clean up audio resources
@@ -221,6 +280,7 @@
     crossorigin="anonymous"
   />
 </svelte:head>
+
 
 {#if screen.currentScreen === "mainMenu"}
   <UseGoBack></UseGoBack>
