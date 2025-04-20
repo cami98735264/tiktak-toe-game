@@ -2,6 +2,10 @@ import type { assetMap, Preferences, Visual, Audio } from '$lib/types/index.ts';
 import { screens } from "$lib/stores/screens";
 import { preferences } from '$lib/stores/preferences';
 import { get } from 'svelte/store';
+// Track last play time for each audio file to prevent rapid multiple plays
+const audioPlayTimes: Record<string, number> = {};
+const DEBOUNCE_TIME = 50; // ms between allowed plays of the same sound
+
 
 const getAssetUrl = (keyword: string) => {
     const assetMap: assetMap = {
@@ -11,6 +15,23 @@ const getAssetUrl = (keyword: string) => {
             grafitti: '/assets/backgrounds/fondo_grafitti.png',
             neon: '/assets/backgrounds/fondo_neon.png',
             minimalistic: '/assets/backgrounds/fondo_minimalista.png',
+        },
+        audios: {
+            wrongAnswer: '/assets/audios/effects/wrong-answer.mp3',
+            correctAnswer: '/assets/audios/effects/correct-answer.mp3',
+            gameStart: '/assets/audios/effects/game-start.mp3',
+            click: '/assets/audios/effects/click.mp3',
+            backgroundMusic: '/assets/audios/background/background-music.mp3',
+            win: '/assets/audios/effects/win.mp3',
+            gameOver: '/assets/audios/effects/game-over.mp3',
+        },
+        icons: {
+            timerIcon: '/assets/icons/timer-icon.svg',
+            personIcon: '/assets/icons/person-icon.svg',
+            heartIcon: '/assets/icons/heart-icon.svg',
+        },
+        logos: {
+            gameLogo: '/assets/logos/mathtriqui-logo.svg',
         }
     };
     // example usage: getAssetUrl('background.classic')
@@ -73,5 +94,34 @@ let handleChangePreferences = (event: MouseEvent) => {
     }
 }
 
-
-export { getAssetUrl, handleChangeScreen, handleChangePreferences };
+function playAudio(pref: any, audioPath: string): void {
+  if (!pref.audio.effects.enable) return;
+  
+  // Prevent rapid successive plays of the same sound
+  const now = Date.now();
+  if (audioPlayTimes[audioPath] && now - audioPlayTimes[audioPath] < DEBOUNCE_TIME) {
+    return; // Skip if the same sound was played very recently
+  }
+  audioPlayTimes[audioPath] = now;
+  
+  // Get or create an audio element
+  let audioElement: HTMLAudioElement;
+  const existingAudio = document.getElementById(`temp-audio-${audioPath}`) as HTMLAudioElement;
+  
+  if (existingAudio) {
+    audioElement = existingAudio;
+  } else {
+    audioElement = new Audio(audioPath);
+    audioElement.id = `temp-audio-${audioPath}`;
+    document.body.appendChild(audioElement);
+  }
+  
+  // Configure and play
+  audioElement.volume = pref.audio.effects.volume / 100;
+  audioElement.currentTime = 0;
+  
+  audioElement.play().catch(err => {
+    console.error("Failed to play audio:", err);
+  });
+}
+export { getAssetUrl, handleChangeScreen, handleChangePreferences, playAudio };

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAssetUrl } from "$lib/utils";
+  import { getAssetUrl } from "$lib/utils/index";
   import { preferences } from "$lib/stores/preferences";
   import { get } from "svelte/store";
     import type { Snippet } from "svelte";
@@ -19,20 +19,20 @@
 <div class="game-layout">
   <div class="timer-container">
     <div class="timer">
-      <img src="/assets/icons/timer-icon.svg" alt="timer" class="timer-icon" />
+      <img src="{getAssetUrl("icons.timerIcon")}" alt="timer" class="timer-icon" />
       <div class="time-remaining">{gameState.timeRemaining}s</div>
     </div>
   </div>
   <div class="game-content">
     <div class="player player1">
       <div class="player-name">
-        <img src="/assets/icons/person-icon.svg" alt="person" class="person-icon" />
+        <img src="{getAssetUrl("icons.personIcon")}" alt="person" class="person-icon" />
         <span>Jugador 1</span>
       </div>
       <div class="player-lives">
         {#each Array(5) as _, i}
           <img 
-            src="/assets/icons/heart-icon.svg" 
+            src="{getAssetUrl("icons.heartIcon")}" 
             alt="heart" 
             class="heart"
             class:lost={i >= gameState.player1Lives}
@@ -46,13 +46,13 @@
     </div>
     <div class="player player2">
       <div class="player-name">
-        <img src="/assets/icons/person-icon.svg" alt="person" class="person-icon" />
+        <img src="{getAssetUrl("icons.personIcon")}" alt="person" class="person-icon" />
         <span>Jugador 2</span>
       </div>
       <div class="player-lives">
         {#each Array(5) as _, i}
           <img 
-            src="/assets/icons/heart-icon.svg" 
+            src="{getAssetUrl("icons.heartIcon")}" 
             alt="heart" 
             class="heart"
             class:lost={i >= gameState.player2Lives}

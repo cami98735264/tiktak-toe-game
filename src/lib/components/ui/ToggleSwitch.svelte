@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ToggleSwitchProps } from "$lib/types";
-	import { handleChangePreferences } from "$lib/utils";
+	import { handleChangePreferences } from "$lib/utils/index";
 	// Define props with defaults
 	let { 
 	  // Original boolean toggle props

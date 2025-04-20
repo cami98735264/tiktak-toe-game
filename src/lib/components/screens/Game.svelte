@@ -1,6 +1,6 @@
 <script lang="ts">
   import LayoutGame from "$lib/components/layout/LayoutGame.svelte";
-  import { getAssetUrl } from "$lib/utils";
+  import { getAssetUrl, playAudio } from "$lib/utils/index";
   import { preferences } from "$lib/stores/preferences";
   import { onMount } from "svelte";
   import { get } from "svelte/store";
@@ -84,6 +84,12 @@
     }
     gameState.gameOver = true;
     gameState.winner = result;
+    // check if there is a winner to play sound
+    if (result === 1 || result === 2) {
+      playAudio(pref, getAssetUrl("audios.win"));
+    } else if (result === "tie") {
+      playAudio(pref, getAssetUrl("audios.game-over"));
+    }
   }
 
   function checkWinner(): number | "tie" | null {
@@ -118,17 +124,22 @@
   }
 
   function showNotificationMessage(message: string, type: "success" | "error") {
-    showNotification = true;
-    notificationMessage = message;
-    notificationType = type;
-    
     if (notificationTimeout) {
       clearTimeout(notificationTimeout);
+      notificationTimeout = undefined;
     }
-    
-    notificationTimeout = window.setTimeout(() => {
-      showNotification = false;
-    }, 3000);
+
+    // Reset notification state to allow replacement of the same type
+    showNotification = false;
+    setTimeout(() => {
+      showNotification = true;
+      notificationMessage = message;
+      notificationType = type;
+
+      notificationTimeout = window.setTimeout(() => {
+        showNotification = false;
+      }, 3000);
+    }, 0);
   }
 
   function handleAnswer(selectedOption: number) {
@@ -139,7 +150,7 @@
       if (selectedCell !== null) {
         gameState.board[selectedCell] = gameState.currentPlayer === 1 ? 
           gameState.player1Character : gameState.player2Character;
-        
+        playAudio(pref, getAssetUrl("audios.correctAnswer"))
         showNotificationMessage(
           `¡Respuesta correcta! Jugador ${gameState.currentPlayer} coloca su ${gameState.currentPlayer === 1 ? gameState.player1Character : gameState.player2Character}`,
           "success"
@@ -154,6 +165,7 @@
         gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
       }
     } else {
+      playAudio(pref, "assets/audios/effects/wrong-answer.mp3");
       // Wrong answer
       showNotificationMessage(
         `¡Respuesta incorrecta! Jugador ${gameState.currentPlayer} pierde una vida.`,

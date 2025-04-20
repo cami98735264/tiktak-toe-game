@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { handleChangePreferences } from "$lib/utils";
+    import { handleChangePreferences } from "$lib/utils/index";
     
     let primaryColor = "var(--secondary)";
     let secondaryColor = "white";

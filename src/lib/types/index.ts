@@ -25,6 +25,23 @@ export interface assetMap {
         grafitti: string,
         neon: string,
         minimalistic: string,
+    },
+    audios: {
+        wrongAnswer: string,
+        correctAnswer: string,
+        gameStart: string,
+        click: string,
+        backgroundMusic: string,
+        win: string,
+        gameOver: string,
+    },
+    icons: {
+        timerIcon: string,
+        personIcon: string,
+        heartIcon: string,
+    },
+    logos: {
+        gameLogo: string
     }
 }
 
@@ -46,6 +63,7 @@ export interface MainMenuProps {
     menuOptions: {
         label: string,
         screen: 'game' | 'howToPlay' | 'settings.audio' | 'settings.visual',
+        onClick?: () => void,
     }[],
     gameLogoPath: string,
 }

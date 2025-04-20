@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { handleChangeScreen } from "$lib/utils";
+  import { handleChangeScreen, playAudio } from "$lib/utils/index";
   import { onMount } from "svelte";
+  import { preferences } from "$lib/stores/preferences";
+  import { get } from "svelte/store";
 
   let { sidebarOptions, paramsCategory, children } = $props();
   let focusedOptionIndex = $state(0);
@@ -11,6 +13,9 @@
   let settingsContainers: HTMLElement[] = [];
   let currentContainerIndex = $state(0);
   let regresarButton: HTMLButtonElement | null = null;
+
+  let lastAudioPlayTime = 0;
+  const AUDIO_DEBOUNCE_TIME = 100; // ms between allowed audio plays
 
   // Find the index of the current category in sidebarOptions
   $effect(() => {
@@ -26,9 +31,28 @@
   // Handle keyboard navigation
   function handleKeyDown(event: KeyboardEvent) {
     const key = event.key.toLowerCase();
-    const clickAudio = document.querySelector(
-      "#click-audio"
-    ) as HTMLAudioElement;
+    const now = Date.now();
+
+    // Prevent sound triggering too rapidly
+    const shouldPlaySound = now - lastAudioPlayTime > AUDIO_DEBOUNCE_TIME;
+
+    // Only play sound if enough time has passed since the last play
+    if (
+      shouldPlaySound &&
+      (key === "arrowdown" ||
+        key === "arrowup" ||
+        key === "arrowleft" ||
+        key === "arrowright" ||
+        key === "s" ||
+        key === "w" ||
+        key === "a" ||
+        key === "d" ||
+        key === "enter")
+    ) {
+      const pref = get(preferences);
+      playAudio(pref, (document.getElementById("click-audio") as HTMLAudioElement)?.src || "");
+      lastAudioPlayTime = now;
+    }
 
     // Navigation in sidebar
     if (!isInContentArea) {
@@ -70,29 +94,12 @@
         event.preventDefault();
         // Focus the Regresar button when pressing left in sidebar
         if (regresarButton) {
-          clickAudio.currentTime = 0;
-          clickAudio.play();
           regresarButton.focus();
         }
       }
     }
     // Navigation in content area
     else {
-      if (
-        key === "arrowdown" ||
-        key === "arrowup" ||
-        key === "arrowleft" ||
-        key === "arrowright" ||
-        key === "s" ||
-        key === "w" ||
-        key === "a" ||
-        key === "d" ||
-        key === "enter"
-      ) {
-        event.preventDefault();
-        clickAudio.currentTime = 0;
-        clickAudio.play();
-      }
       if (key === "arrowleft" || key === "a") {
         event.preventDefault();
         const currentContainer = settingsContainers[currentContainerIndex];

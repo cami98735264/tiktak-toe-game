@@ -1,6 +1,6 @@
 <script lang="ts">
   import LayoutStart from "$lib/components/layout/LayoutStart.svelte";
-  import { getAssetUrl } from "$lib/utils";
+  import { getAssetUrl } from "$lib/utils/index";
 
   const instructions = [
     {
@@ -26,7 +26,7 @@
   ];
 </script>
 
-<LayoutStart gameLogoPath="/assets/logos/mathtriqui-logo.svg">
+<LayoutStart gameLogoPath="{getAssetUrl("logos.gameLogo")}">
   <div class="how-to-play-container">
     <h2 class="how-to-play-title">Cómo Jugar</h2>
     <div class="instructions-container">

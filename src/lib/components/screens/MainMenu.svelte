@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { handleChangeScreen } from "$lib/utils";
+    import { getAssetUrl, handleChangeScreen } from "$lib/utils/index";
     import LayoutStart from "$lib/components/layout/LayoutStart.svelte";
     import type { MainMenuProps } from "$lib/types";
     let { menuOptions }: Omit<MainMenuProps, 'gameLogoPath'> = $props();
@@ -8,9 +8,14 @@
   
   
   
-  <LayoutStart gameLogoPath={"/assets/logos/mathtriqui-logo.svg"}>
+  <LayoutStart gameLogoPath={getAssetUrl("logos.gameLogo")}>
                   {#each menuOptions as option}
-                    <button class="start-screen-option" data-screen={option.screen} onclick={handleChangeScreen} type="button"><span class="active-item">{">"}</span> {option.label}</button>
+                    <button class="start-screen-option" data-screen={option.screen} onclick={(e) => {
+                        handleChangeScreen(e);
+                        if(option.onClick) {
+                            option.onClick();
+                        }
+                    }} type="button"><span class="active-item">{">"}</span> {option.label}</button>
                   {/each}
   </LayoutStart>
   

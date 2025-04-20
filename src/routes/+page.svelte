@@ -2,13 +2,14 @@
   import { get } from "svelte/store";
   import { preferences } from "$lib/stores/preferences";
   import { screens } from "$lib/stores/screens";
-  import { getAssetUrl } from "$lib/utils";
+  import { getAssetUrl } from "$lib/utils/index";
   import MainMenu from "$lib/components/screens/MainMenu.svelte";
   import UseGoBack from "$lib/components/hooks/useGoBack.svelte";
   import { onMount } from "svelte";
   import Settings from "$lib/components/screens/Settings.svelte";
   import Game from "$lib/components/screens/Game.svelte";
   import HowToPlay from "$lib/components/screens/HowToPlay.svelte";
+  import { playAudio } from "$lib/utils/index";
   let pref = $state(get(preferences));
   let screen = $state(get(screens));
   // Audio elements
@@ -96,42 +97,34 @@
   }
 
   onMount(() => {
-    // cleans up the event listeners when the component is destroyed
     // Set up various user interaction events to initialize audio
     const interactionEvents = ['click', 'touchstart', 'keydown'];
     interactionEvents.forEach(event => {
       document.addEventListener(event, initializeAudio, { once: true });
     });
     
-    document.addEventListener("click", (event) => {
+    // Enhanced click handler with event stopping
+    const clickHandler = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (target.tagName === "BUTTON") {
-        playClickAudio();
+        // Stop event propagation to prevent multiple triggers
+        event.stopPropagation();
+        playAudio(pref, getAssetUrl("audios.click"));
       }
-    });
-    document.addEventListener("touchstart", (event) => {
-      const target = event.target as HTMLElement;
-      if (target.tagName === "BUTTON") {
-        playClickAudio();
-      }
-    });
+    };
+    
+    document.addEventListener("click", clickHandler);
+    
     return () => {
+      // Clean up all event listeners
       const interactionEvents = ['click', 'touchstart', 'keydown'];
       interactionEvents.forEach(event => {
         document.removeEventListener(event, initializeAudio);
       });
+      document.removeEventListener("click", clickHandler);
     };
   });
 
-  function playClickAudio() {
-    if (pref.audio.effects.enable) {
-      const audio = new Audio("/assets/audios/effects/click.mp3");
-      audio.volume = pref.audio.effects.volume / 100;
-      audio.play().catch(err => console.error("Failed to play click sound:", err));
-      // Ensure background music is initialized on button click
-      initializeAudio();
-    }
-  }
 </script>
 
 <svelte:head>
@@ -145,27 +138,37 @@
 </svelte:head>
 
 
+
 <audio 
   bind:this={clickAudio}
   id="click-audio"
-  src="/assets/audios/effects/click.mp3"
+  src="{getAssetUrl("audios.click")}"
   volume={pref.audio.effects.volume / 100}
   muted={!pref.audio.effects.enable}
 ></audio>
 <audio
   bind:this={backgroundMusic}
   id="background-music"
-  src="/assets/audios/background/background_music.mp3"
+  src="{getAssetUrl("audios.backgroundMusic")}"
   loop
   volume={pref.audio.music.volume / 100}
   muted={!pref.audio.music.enable}
 ></audio>
-
+<audio 
+  id="game-start-audio"
+  src="{getAssetUrl("audios.gameStart")}"
+  volume={pref.audio.effects.volume / 100}
+  muted={!pref.audio.effects.enable}
+></audio>
 {#if screen.currentScreen === "mainMenu"}
   <UseGoBack></UseGoBack>
   <MainMenu
     menuOptions={[
-      { label: "Empezar", screen: "game" },
+      { label: "Empezar", screen: "game", onClick: () => {
+        if (pref.audio.effects.enable) {
+          playAudio(pref, getAssetUrl("audios.gameStart"));
+        }
+      }},
       { label: "Cómo jugar", screen: "howToPlay" },
       { label: "Opciones", screen: "settings.audio" },
     ]}
