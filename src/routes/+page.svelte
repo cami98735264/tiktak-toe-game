@@ -18,6 +18,7 @@
   let audioContext: AudioContext | null = null;
   let backgroundMusicBuffer: AudioBuffer | null = null;
   let backgroundMusicSource: AudioBufferSourceNode | null = null;
+  let gainNode: GainNode | null = null;
   let audioInitialized = false;
 
   $effect(() => {
@@ -92,6 +93,12 @@
     return await audioContext!.decodeAudioData(arrayBuffer);
   }
 
+  function updateMusicVolume(volume: number) {
+    if (gainNode) {
+      gainNode.gain.value = volume / 100;
+    }
+  }
+
   function initializeAudio() {
     if (!audioInitialized) {
       audioInitialized = true;
@@ -123,7 +130,7 @@
     backgroundMusicSource.loop = true;
 
     // Create a gain node for volume control
-    const gainNode = audioContext.createGain();
+    gainNode = audioContext.createGain();
     gainNode.gain.value = pref.audio.music.volume / 100;
 
     // Connect the nodes
@@ -140,6 +147,25 @@
       });
     }
   }
+
+  $effect(() => {
+    if (pref.audio.music.enable) {
+      if (!audioInitialized) {
+        initializeAudio();
+      } else {
+        // If music was previously stopped, restart it
+        if (!backgroundMusicSource) {
+          playBackgroundMusic();
+        }
+        updateMusicVolume(pref.audio.music.volume);
+      }
+    } else if (backgroundMusicSource) {
+      // Stop music if disabled
+      backgroundMusicSource.stop();
+      backgroundMusicSource = null;
+      gainNode = null;
+    }
+  });
 
   onMount(() => {
     // Set up various user interaction events to initialize audio
@@ -173,6 +199,10 @@
         backgroundMusicSource.stop();
         backgroundMusicSource = null;
       }
+      if (gainNode) {
+        gainNode.disconnect();
+        gainNode = null;
+      }
       if (audioContext) {
         audioContext.close();
         audioContext = null;
@@ -192,29 +222,6 @@
   />
 </svelte:head>
 
-
-
-<audio 
-  bind:this={clickAudio}
-  id="click-audio"
-  src="{getAssetUrl("audios.click")}"
-  volume={pref.audio.effects.volume / 100}
-  muted={!pref.audio.effects.enable}
-></audio>
-<audio
-  bind:this={backgroundMusic}
-  id="background-music"
-  src="{getAssetUrl("audios.backgroundMusic")}"
-  loop
-  volume={pref.audio.music.volume / 100}
-  muted={!pref.audio.music.enable}
-></audio>
-<audio 
-  id="game-start-audio"
-  src="{getAssetUrl("audios.gameStart")}"
-  volume={pref.audio.effects.volume / 100}
-  muted={!pref.audio.effects.enable}
-></audio>
 {#if screen.currentScreen === "mainMenu"}
   <UseGoBack></UseGoBack>
   <MainMenu
