@@ -62,7 +62,7 @@ export interface Screens {
 export interface MainMenuProps {
     menuOptions: {
         label: string,
-        screen: 'game' | 'howToPlay' | 'settings.audio' | 'settings.visual',
+        screen: 'game' | 'howToPlay' | 'settings.audio' | 'settings.visual' | 'playerNames',
         onClick?: () => void,
     }[],
     gameLogoPath: string,

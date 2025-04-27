@@ -94,7 +94,7 @@ let handleChangePreferences = (event: MouseEvent) => {
     }
 }
 
-function playAudio(pref: any, audioPath: string): void {
+function playAudio(pref: Preferences, audioPath: string): void {
   if (!pref.audio.effects.enable) return;
   
   // Prevent rapid successive plays of the same sound

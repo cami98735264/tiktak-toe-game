@@ -10,6 +10,7 @@
   import Game from "$lib/components/screens/Game.svelte";
   import HowToPlay from "$lib/components/screens/HowToPlay.svelte";
   import { playAudio } from "$lib/utils/index";
+  import PlayerNames from "$lib/components/screens/PlayerNames.svelte";
   let pref = $state(get(preferences));
   let screen = $state(get(screens));
   // Audio elements
@@ -286,18 +287,17 @@
   <UseGoBack></UseGoBack>
   <MainMenu
     menuOptions={[
-      { label: "Empezar", screen: "game", onClick: () => {
-        if (pref.audio.effects.enable) {
-          playAudio(pref, getAssetUrl("audios.gameStart"));
-        }
-      }},
+      { label: "Empezar", screen: "playerNames" },
       { label: "Cómo jugar", screen: "howToPlay" },
       { label: "Opciones", screen: "settings.audio" },
     ]}
   />
+{:else if screen.currentScreen === "playerNames"}
+  <UseGoBack></UseGoBack>
+  <PlayerNames />
 {:else if screen.currentScreen === "game"}
   <UseGoBack showConfirmation={true}></UseGoBack>
-  <Game />
+  <Game player1Name={screen.currentScreenParams?.player1Name || "Jugador 1"} player2Name={screen.currentScreenParams?.player2Name || "Jugador 2"} />
 {:else if screen.currentScreen === "settings.audio"}
   <UseGoBack></UseGoBack>
   <Settings category={"audio"}/>

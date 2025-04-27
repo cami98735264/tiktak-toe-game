@@ -8,6 +8,8 @@
     player2Lives: number;
     player1Character: string;
     player2Character: string;
+    player1Name: string;
+    player2Name: string;
     timeRemaining: number;
     currentPlayer: number;
   }
@@ -27,7 +29,7 @@
     <div class="player player1">
       <div class="player-name">
         <img src="{getAssetUrl("icons.personIcon")}" alt="person" class="person-icon" />
-        <span>Jugador 1</span>
+        <span>{gameState.player1Name}</span>
       </div>
       <div class="player-lives">
         {#each Array(5) as _, i}
@@ -47,7 +49,7 @@
     <div class="player player2">
       <div class="player-name">
         <img src="{getAssetUrl("icons.personIcon")}" alt="person" class="person-icon" />
-        <span>Jugador 2</span>
+        <span>{gameState.player2Name}</span>
       </div>
       <div class="player-lives">
         {#each Array(5) as _, i}
@@ -71,7 +73,7 @@
       <div class="game-stats">
         <div class="stat">
           <span class="stat-label">Turno:</span>
-          <span class="stat-value">Jugador {gameState.currentPlayer}</span>
+          <span class="stat-value">{gameState.currentPlayer === 1 ? gameState.player1Name : gameState.player2Name}</span>
         </div>
         <div class="stat">
           <span class="stat-label">Vidas restantes:</span>

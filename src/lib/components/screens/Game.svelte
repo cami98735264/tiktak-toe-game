@@ -5,6 +5,8 @@
   import { onMount } from "svelte";
   import { get } from "svelte/store";
 
+  let { player1Name = "Jugador 1", player2Name = "Jugador 2" } = $props<{ player1Name?: string, player2Name?: string }>();
+
   interface Question {
     question: string;
     options: string[];
@@ -18,6 +20,8 @@
     player2Lives: number;
     player1Character: string;
     player2Character: string;
+    player1Name: string;
+    player2Name: string;
     timeRemaining: number;
     gameOver: boolean;
     winner: number | "tie" | null;
@@ -33,6 +37,8 @@
     player2Lives: 5,
     player1Character: "X",
     player2Character: "O",
+    player1Name,
+    player2Name,
     timeRemaining: 300,
     gameOver: false,
     winner: null
@@ -45,6 +51,9 @@
   let notificationMessage = $state("");
   let notificationType = $state<"success" | "error">("success");
   let notificationTimeout: number | undefined;
+  let showCorrectAnswer = $state(false);
+  let correctAnswerIndex = $state<number | null>(null);
+  let answerTimeout: number | undefined;
 
   async function loadQuestions() {
     try {
@@ -143,55 +152,74 @@
   }
 
   function handleAnswer(selectedOption: number) {
-    showQuestion = false;
-    
-    if (currentQuestion && selectedOption === currentQuestion.correct) {
-      // Correct answer
-      if (selectedCell !== null) {
-        gameState.board[selectedCell] = gameState.currentPlayer === 1 ? 
-          gameState.player1Character : gameState.player2Character;
-        playAudio(pref, getAssetUrl("audios.correctAnswer"))
-        showNotificationMessage(
-          `¡Respuesta correcta! Jugador ${gameState.currentPlayer} coloca su ${gameState.currentPlayer === 1 ? gameState.player1Character : gameState.player2Character}`,
-          "success"
-        );
-        
-        const winner = checkWinner();
-        if (winner) {
-          endGame(winner);
-          return;
-        }
-        
-        gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
-      }
-    } else {
-      playAudio(pref, "assets/audios/effects/wrong-answer.mp3");
-      // Wrong answer
-      showNotificationMessage(
-        `¡Respuesta incorrecta! Jugador ${gameState.currentPlayer} pierde una vida.`,
-        "error"
-      );
-      
-      if (gameState.currentPlayer === 1) {
-        gameState.player1Lives--;
-        if (gameState.player1Lives === 0) {
-          endGame(2);
-          return;
+    if (currentQuestion) {
+      if (selectedOption === currentQuestion.correct) {
+        // Correct answer
+        showQuestion = false;
+        if (selectedCell !== null) {
+          gameState.board[selectedCell] = gameState.currentPlayer === 1 ? 
+            gameState.player1Character : gameState.player2Character;
+          playAudio(pref, getAssetUrl("audios.correctAnswer"))
+          showNotificationMessage(
+            `¡Respuesta correcta! ${gameState.currentPlayer === 1 ? gameState.player1Name : gameState.player2Name} coloca su ${gameState.currentPlayer === 1 ? gameState.player1Character : gameState.player2Character}`,
+            "success"
+          );
+          
+          const winner = checkWinner();
+          if (winner) {
+            endGame(winner);
+            return;
+          }
+          
+          gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
         }
       } else {
-        gameState.player2Lives--;
-        if (gameState.player2Lives === 0) {
-          endGame(1);
-          return;
+        // Wrong answer
+        playAudio(pref, "assets/audios/effects/wrong-answer.mp3");
+        showCorrectAnswer = true;
+        correctAnswerIndex = currentQuestion.correct;
+        
+        // Clear any existing timeout
+        if (answerTimeout) {
+          clearTimeout(answerTimeout);
         }
+        
+        // Set timeout to proceed after showing correct answer
+        answerTimeout = window.setTimeout(() => {
+          showQuestion = false;
+          showCorrectAnswer = false;
+          correctAnswerIndex = null;
+          
+          showNotificationMessage(
+            `¡Respuesta incorrecta! ${gameState.currentPlayer === 1 ? gameState.player1Name : gameState.player2Name} pierde una vida.`,
+            "error"
+          );
+          
+          if (gameState.currentPlayer === 1) {
+            gameState.player1Lives--;
+            if (gameState.player1Lives === 0) {
+              endGame(2);
+              return;
+            }
+          } else {
+            gameState.player2Lives--;
+            if (gameState.player2Lives === 0) {
+              endGame(1);
+              return;
+            }
+          }
+          gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
+        }, 2000);
       }
-      gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
     }
   }
 
   onMount(() => {
     loadQuestions();
     startTimer();
+    if (pref.audio.effects.enable) {
+      playAudio(pref, getAssetUrl("audios.gameStart"));
+    }
     return () => {
       if (timerInterval) {
         clearInterval(timerInterval);
@@ -208,6 +236,8 @@
   player2Lives: gameState.player2Lives,
   player1Character: gameState.player1Character,
   player2Character: gameState.player2Character,
+  player1Name: gameState.player1Name,
+  player2Name: gameState.player2Name,
   timeRemaining: gameState.timeRemaining,
   currentPlayer: gameState.currentPlayer
 }}>
@@ -225,11 +255,15 @@
 {#if showQuestion && currentQuestion}
   <div class="question-modal">
     <div class="question-content">
-      <h2>Pregunta para el Jugador {gameState.currentPlayer}</h2>
+      <h2>Pregunta para {gameState.currentPlayer === 1 ? gameState.player1Name : gameState.player2Name}</h2>
       <p>{currentQuestion.question}</p>
       <div class="options">
         {#each currentQuestion.options as option, i}
-          <button onclick={() => handleAnswer(i)}>
+          <button 
+            onclick={() => handleAnswer(i)}
+            class:correct={showCorrectAnswer && i === correctAnswerIndex}
+            disabled={showCorrectAnswer}
+          >
             {option}
           </button>
         {/each}
@@ -245,7 +279,7 @@
         {#if gameState.winner === "tie"}
           ¡Empate!
         {:else}
-          ¡Jugador {gameState.winner} gana!
+          ¡{gameState.winner === 1 ? gameState.player1Name : gameState.player2Name} gana!
         {/if}
       </h2>
       <button onclick={() => window.location.reload()}>
@@ -373,6 +407,23 @@
     background-color: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .options button.correct {
+    background-color: var(--success, #28a745);
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   .game-over-content {
