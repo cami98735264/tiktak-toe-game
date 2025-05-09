@@ -16,6 +16,10 @@ export interface Visual {
     colorTheme: 'light' | 'dark' | 'colorful'
 }
 
+export interface Game {
+    lives: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
+    time: 180 | 300 | 420 | 540 | 660,
+}
 
 
 export interface assetMap {
@@ -48,6 +52,7 @@ export interface assetMap {
 export interface Preferences {
     audio: Audio,
     visual: Visual,
+    game: Game,
 }
 
 export interface Screens {

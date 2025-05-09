@@ -33,13 +33,13 @@
   let gameState = $state<GameState>({
     board: Array(9).fill(null),
     currentPlayer: 1,
-    player1Lives: 5,
-    player2Lives: 5,
+    player1Lives: pref.game.lives,
+    player2Lives: pref.game.lives,
     player1Character: "X",
     player2Character: "O",
     player1Name,
     player2Name,
-    timeRemaining: 300,
+    timeRemaining: pref.game.time,
     gameOver: false,
     winner: null
   });
@@ -297,7 +297,7 @@
 
 <style>
   .cell {
-    background-color: var(--background);
+    background-color: var(--primary-content);
     border: none;
     border-radius: 8px;
     font-size: var(--font-size-medium);
@@ -346,7 +346,7 @@
 
   .question-content,
   .game-over-content {
-    background-color: var(--background);
+    background-color: var(--primary-light);
     padding: 2rem;
     border-radius: 12px;
     max-width: 500px;
@@ -369,7 +369,7 @@
   .question-content h2,
   .game-over-content h2 {
     color: var(--primary-content);
-    text-shadow: var(--shadow-border-light);
+    text-shadow: var(--shadow-border-strong);
     font-size: var(--font-size-large);
     text-align: center;
     margin-bottom: 1rem;

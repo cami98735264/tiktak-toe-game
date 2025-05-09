@@ -15,6 +15,10 @@ export const preferences = persisted('preferences', {
   visual: {
     backgroundStyle: 'classic',
     colorTheme: 'light'
+  },
+  game: {
+    lives: 5,
+    time: 300,
   }
 } as Preferences);
 

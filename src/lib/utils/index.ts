@@ -6,6 +6,8 @@ import { get } from 'svelte/store';
 const audioPlayTimes: Record<string, number> = {};
 const DEBOUNCE_TIME = 50; // ms between allowed plays of the same sound
 
+type timeUnits = "seconds" | "minutes" | "hours"
+
 
 const getAssetUrl = (keyword: string) => {
     const assetMap: assetMap = {
@@ -94,7 +96,7 @@ let handleChangePreferences = (event: MouseEvent) => {
     }
 }
 
-function playAudio(pref: Preferences, audioPath: string): void {
+let playAudio = (pref: Preferences, audioPath: string): void => {
   if (!pref.audio.effects.enable) return;
   
   // Prevent rapid successive plays of the same sound
@@ -138,4 +140,19 @@ function playAudio(pref: Preferences, audioPath: string): void {
       audioContext.close();
     });
 }
-export { getAssetUrl, handleChangeScreen, handleChangePreferences, playAudio };
+
+
+let convertNumber = (from: timeUnits, to: timeUnits, value: number): number => {
+    const conversionRates: Record<timeUnits, Record<timeUnits, number>> = {
+        seconds: { seconds: 1, minutes: 1 / 60, hours: 1 / 3600 },
+        minutes: { seconds: 60, minutes: 1, hours: 1 / 60 },
+        hours: { seconds: 3600, minutes: 60, hours: 1 },
+    };
+
+    if (conversionRates[from] && conversionRates[from][to]) {
+        return value * conversionRates[from][to];
+    } else {
+        throw new Error(`Invalid time unit conversion from ${from} to ${to}`);
+    }
+};
+export { getAssetUrl, handleChangeScreen, handleChangePreferences, playAudio, convertNumber };

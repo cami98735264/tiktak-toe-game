@@ -7,6 +7,7 @@
     let {
       id = `slider-${Math.random().toString(36).substring(2, 9)}`,  // Generate unique ID for each instance
       value = 50,
+      customLabel = (value: string | number) => "",
       min = 0,
       max = 100,
       step = 5,
@@ -69,7 +70,7 @@
         class="value-indicator {showValue ? 'visible' : ''}" 
         style="left: calc((({value} - {min}) / ({max} - {min})) * 100%)"
       >
-        {value}%
+        {value}{customLabel(value)}
       </div>
   
       <input
@@ -86,8 +87,8 @@
       />
   
       <div class="range-labels">
-        <span>{min}</span>
-        <span>{max}</span>
+        <span>{min}{customLabel(min)}</span>
+        <span>{max}{customLabel(max)}</span>
       </div>
     </div>
   </div>

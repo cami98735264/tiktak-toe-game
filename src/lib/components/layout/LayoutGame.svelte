@@ -16,13 +16,19 @@
 
   let { gameState, children } = $props<{ gameState: GameState, children: Snippet }>();
   let pref = $state(get(preferences));
+
+  function formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}min ${remainingSeconds}seg`;
+  }
 </script>
 
 <div class="game-layout">
   <div class="timer-container">
     <div class="timer">
       <img src="{getAssetUrl("icons.timerIcon")}" alt="timer" class="timer-icon" />
-      <div class="time-remaining">{gameState.timeRemaining}s</div>
+      <div class="time-remaining">{formatTime(gameState.timeRemaining)}</div>
     </div>
   </div>
   <div class="game-content">
@@ -32,7 +38,7 @@
         <span>{gameState.player1Name}</span>
       </div>
       <div class="player-lives">
-        {#each Array(5) as _, i}
+        {#each Array(pref.game.lives) as _, i}
           <img 
             src="{getAssetUrl("icons.heartIcon")}" 
             alt="heart" 
@@ -52,7 +58,7 @@
         <span>{gameState.player2Name}</span>
       </div>
       <div class="player-lives">
-        {#each Array(5) as _, i}
+        {#each Array(pref.game.lives) as _, i}
           <img 
             src="{getAssetUrl("icons.heartIcon")}" 
             alt="heart" 
@@ -149,6 +155,7 @@
     border-radius: 12px;
     background-color: var(--foreground);
     min-width: 180px;
+    max-width: 280px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
   }
@@ -176,12 +183,15 @@
     border-radius: 8px;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 100%;
+    width: 100%;
   }
 
   .heart {
     width: 32px;
     height: 32px;
     transition: all 0.3s ease;
+    flex-shrink: 0;
   }
 
   .heart.lost {
@@ -297,6 +307,7 @@
     .player {
       width: 100%;
       min-width: 0;
+      max-width: none;
       padding: 1rem;
       flex-direction: row;
       justify-content: space-between;
@@ -305,11 +316,15 @@
 
     .player-name {
       width: auto;
+      min-width: 140px;
     }
 
     .player-lives {
       flex: 1;
       justify-content: center;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      max-width: 280px;
     }
 
     .heart {
@@ -364,8 +379,8 @@
     }
 
     .player-lives {
-      padding: 0.25rem;
       gap: 0.25rem;
+      padding: 0.25rem;
     }
 
     .heart {

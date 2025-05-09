@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   let { category } = $props();
   import { preferences } from "$lib/stores/preferences";
   import { get } from "svelte/store";
   import LayoutSettings from "$lib/components/layout/LayoutSettings.svelte";
   import Slider from "../ui/Slider.svelte";
   import ToggleSwitch from "../ui/ToggleSwitch.svelte";
+  import { convertNumber } from "$lib/utils/index";
 
   let preferencesData = $state(get(preferences));
 
@@ -28,6 +29,10 @@
       label: "Visual",
       screen: "settings.visual",
     },
+    {
+      label: "Juego",
+      screen: "settings.game",
+    }
   ]}
   paramsCategory={category}
 >
@@ -126,6 +131,32 @@
               },
             ]}
           ></ToggleSwitch>
+        </div>
+      </div>
+    </div>
+  {:else if category === "game"}
+    <h2 class="settings-title">Configuración del juego</h2>
+    <div class="settings-container">
+      <div class="settings-options-section">
+        <div class="settings-options-container">
+          <h3 class="settings-subtitle">Vidas totales</h3>
+          <Slider
+            propertyToChange="game.lives"
+            customLabel={() => " vidas"}
+            value={preferencesData.game.lives}
+            min={1}
+            max={10}
+            step={1} />
+        </div>
+        <div class="settings-options-container">
+          <h3 class="settings-subtitle">Tiempo de juego</h3>
+          <Slider
+            customLabel={(value: number) => ` segundos (${convertNumber("seconds", "minutes", value)} minutos)`}
+            propertyToChange="game.time"
+            value={preferencesData.game.time}
+            min={180}
+            max={660}
+            step={120} />
         </div>
       </div>
     </div>

@@ -41,8 +41,13 @@
           document.documentElement.style.setProperty('--copy', '#ffffff');
           document.documentElement.style.setProperty('--copy-light', '#cccccc');
           document.documentElement.style.setProperty('--copy-lighter', '#999999');
+          document.documentElement.style.setProperty('--secondary', '#ff5722');
+          document.documentElement.style.setProperty('--secondary-dark', '#e64a19');
+          document.documentElement.style.setProperty('--secondary-light', '#ff8a50');
+
           break;
         case 'colorful':
+
           document.documentElement.style.setProperty('--primary', '#4a90e2');
           document.documentElement.style.setProperty('--primary-dark', '#357abd');
           document.documentElement.style.setProperty('--primary-light', '#6ba7e8');
@@ -304,6 +309,9 @@
 {:else if screen.currentScreen === "settings.visual"}
   <UseGoBack></UseGoBack>
   <Settings category={"visual"}/>
+  {:else if screen.currentScreen === "settings.game"}
+  <UseGoBack></UseGoBack>
+  <Settings category={"game"}/>
 {:else if screen.currentScreen === "howToPlay"}
   <UseGoBack></UseGoBack>
   <HowToPlay />
